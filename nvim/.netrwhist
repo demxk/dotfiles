@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/usr/share/zsh/functions'
+let g:netrw_dirhist_2='/usr/share/zsh/functions/Math'
+let g:netrw_dirhist_3='/usr/share/zsh/functions'
+let g:netrw_dirhist_4='/usr/share/zsh/functions/Completion'
+let g:netrw_dirhist_5='/usr/share/zsh/functions/Completion/Zsh'
+let g:netrw_dirhist_6='/usr/share/zsh/functions/Completion'
+let g:netrw_dirhist_7='/usr/share/zsh/functions'
+let g:netrw_dirhist_8='/usr/share/zsh/functions/Chpwd'
+let g:netrw_dirhist_9='/usr/share/zsh/functions/Zle'
