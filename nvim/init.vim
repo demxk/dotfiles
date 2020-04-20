@@ -20,8 +20,23 @@ Plug 'wellle/targets.vim'
 Plug 'junegunn/fzf.vim'
 call plug#end()
 
+let mapleader=" "
+
+" highlight current line, but only in active window
+augroup CursorLineOnlyInActiveWindow
+    autocmd!
+    autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+    autocmd WinLeave * setlocal nocursorline
+augroup END
+
+nmap <leader>w :w<CR>
+nmap <leader>q :q<CR>
+
 " leave xclipboard untouched after nvim exit
 autocmd vimleave * exe ":!echo " . shellescape(getreg('+')) . " | xclip -selection clipboard"
+
+" for netrw ,detele buffers once they are hidden
+autocmd FileType netrw setl bufhidden=delete
 
 " disable Ex mode
 nnoremap Q <nop>
@@ -41,10 +56,9 @@ cnoremap <c-k> <up>
 
 nnoremap <leader>jj :<Up>
 
-let mapleader=" "
-set background=light
+" set background=light
 let g:gruvbox_contrast_light = 'medium'
-let g:gruvbox_contrast_dark = "soft"
+let g:gruvbox_contrast_dark = "medium"
 colorscheme gruvbox
 let g:lightline = {
             \ 'component': {
@@ -62,10 +76,9 @@ let g:lightline = {
 highlight Search ctermbg=white ctermfg=Brown
 
 
-
+" add spaces below/above
 nnoremap ]<space>  :<c-u>put! =repeat(nr2char(10), v:count1)<cr>'[
 nnoremap [<space>  :<c-u>put =repeat(nr2char(10), v:count1)<cr>
-nnoremap <ESC> :noh<CR>
 
 " resize windows by + - < >
 nmap <C-W>= <C-w>2+
@@ -78,11 +91,12 @@ map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 
+set ignorecase
+set smartcase
+set noswapfile
 set noshowmode
 set complete-=i   " disable scanning included files
 set complete-=t   " disable searching tags
-set winwidth=50
-set winheight=20
 set completeopt=menuone,noinsert,noselect
 set completeopt-=preview
 set shiftwidth=4
@@ -95,7 +109,7 @@ set scrolloff=5
 set sidescrolloff=6
 set number relativenumber
 set termguicolors
-set cursorline
+set diffopt+=iwhite " No whitespace in vimdiff
 
 let g:pear_tree_smart_openers = 0
 let g:pear_tree_smart_closers = 0
@@ -103,7 +117,9 @@ let g:pear_tree_repeatable_expand = 0
 let g:pear_tree_smart_backspace = 0
 
 
-let g:fzf_layout = { 'right': '~50%' }
+let g:fzf_buffers_jump = 1
+let g:fzf_layout = { 'right': '~40%' }
+let g:fzf_preview_window = ''
 
 nnoremap <silent> <Esc> :nohlsearch<CR><C-L>
 "create a new buffer (save it with :w ./path/to/FILENAME)
@@ -117,7 +133,11 @@ nnoremap <leader>ba :bufdo bd!<cr>
 ""Shift + Tab to switch to previous open buffer
 "nnoremap <S-Tab> :bprevious<cr>
 "leader key twice to cycle between last two open buffers
-nnoremap <leader><leader> <c-^>
+nnoremap <silent> <leader><leader> :Buffers<CR>
+nnoremap <silent> <leader>f :Files<CR>
+nnoremap <silent> <leader>t :Tags<CR>
+nnoremap <silent> <leader>s :Rg<CR>
+nnoremap <silent> <leader>h :History:<CR>
 
 " Disables automatic commenting on newline:
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
@@ -135,13 +155,23 @@ nnoremap <M-j> :m+<cr>==
 xnoremap <M-k> :m-2<cr>gv=gv
 xnoremap <M-j> :m'>+<cr>gv=gv
 
+" paste with newline in normal mode
+nmap <leader>p o<esc>p
+
+" Netrw
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 2
+let g:netrw_winsize = 25
+" augroup ProjectDrawer
+"   autocmd!
+"   autocmd VimEnter * :Vexplore
+" augroup END
 
 "persist in v-mode after >> <<"
 vmap < <gv
 vmap > >gv
 
-set nobackup
-set noswapfile
 
 "update index"
 "nnoremap <leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
@@ -156,18 +186,19 @@ set clipboard=unnamedplus
 nnoremap x "_x
 nnoremap d "_d
 vnoremap d "_d
-nnoremap <leader>d "+d
-vnoremap <leader>d "+d
 nnoremap c "_c
 nnoremap C "_C
 vnoremap c "_c
 vnoremap C "_C
 
+" delete to clipboard
+nnoremap <leader>d "+d
+vnoremap <leader>d "+d
+
 let g:pymode_options_colorcolumn = 0
 
 "unmap <C-Space>
 let g:jedi#completions_command = "<C-Space>"
-
 
 let g:pymode_python = 'python3'
 let g:deoplete#sources#jedi#enable_typeinfo = 0
@@ -177,5 +208,3 @@ let g:deoplete#sources#jedi#show_docstring = 0
 let g:jedi#completions_enabled = 1
 let g:jedi#goto_definitions_command = "<leader>d"
 let g:pymode_syntax_space_errors = 0
-
-autocmd FileType python setlocal formatprg=autopep8\ -
