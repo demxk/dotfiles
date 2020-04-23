@@ -51,16 +51,16 @@ label-indicator-background = #282828
 
 [bar/i3wmthemer_bar]
 bottom = false
-font-0 = "Cascadia Code:size=16,1"
+font-0 = "Fira Code:size=15"
 fixed-center = false
 
 width = 100%
 height = 30
 radius = 0
 
-background = #282828
+background = #212020
 /* foreground = #ebdbb2 */
-foreground = #e8e8b3
+foreground = #e6e6e6
 
 
 line-size = 3
@@ -150,8 +150,8 @@ label-mode-foreground = #1e272b
 label-mode-background = #e5eae8
 
 label-focused = %index%
-label-focused-background = #1b66b5
-label-focused-foreground = #e6eae8
+label-focused-background = #3b88d9
+label-focused-foreground = #ffffff
 label-focused-padding = 2
 
 label-unfocused = %index%

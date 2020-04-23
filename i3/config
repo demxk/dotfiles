@@ -1,11 +1,11 @@
 set $mod Mod4
-default_border pixel 3
+default_border pixel 1
 default_floating_border pixel 2
 smart_borders on
-hide_edge_borders none
+hide_edge_borders smart
 
 bindsym $mod+u border none
-bindsym $mod+y border pixel 3
+bindsym $mod+y border pixel 2
 #bindsym $mod+n border normal
 
 #font xft:Cascadia-code 16
@@ -18,7 +18,7 @@ bindsym $mod+Return exec kitty
 bindsym $mod+Shift+q kill
 
 
-#for_window [class="URxvt"] border pixel 2
+#for_window [class="active"] border pixel 2
 
 # print screen
 
@@ -30,7 +30,7 @@ bindsym XF86Favorites exec light -U 5 # decrease screen brightness
 
 
 # start program launcher
-bindsym $mod+d exec rofi -show run
+bindsym $mod+d exec --no-startup-id rofi -show run
 bindsym $mod+p exec --no-startup-id rofi -show drun
 bindsym XF86AudioRaiseVolume exec pactl set-sink-mute 0 false && pactl set-sink-volume 0 +5%
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -5%
@@ -193,6 +193,7 @@ bindsym $mod+Shift+e exec pkill -KILL -u $USER
 # Set shut down, restart and locking features
 
 # Autostart applications
+exec --no-startup-id picom -b
 exec --no-startup-id nitrogen --set-auto ~/pics/wallpapers/randall-mackey-mural2.jpg
 exec --no-startup-id nm-applet
 exec_always --no-startup-id ff-theme-util
@@ -202,7 +203,7 @@ exec --no-startup-id xautolock -detectsleep \
 	-time 10 -locker 'i3lock-fancy -t "$(xkblayout)"  -- scrot'
 
 # Theme colors			border	backg	text	indic	child_bor	
-client.focused			#e0556a #f0fff5 #2e363b #e0556a #e0556a
+client.focused			#28d4d1 #f0fff5 #2e363b #e0556a #28d4d1
 client.focused_inactive #f0e99e #2e363b #f0fff5 #688486 #688486
 client.unfocused		#888888 #888888 #2e363b #888888 #888888
 client.urgent			#b0c4bb #2f2f38 #b0c4bb #688486 #688486
@@ -212,7 +213,7 @@ client.background #2f2f38
 
 # Gaps
 gaps inner 12
-gaps outer 14
+gaps outer 0
 
 smart_gaps on
 

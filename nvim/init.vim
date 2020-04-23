@@ -9,18 +9,21 @@ call plug#begin('~/.local/share/nvim/plugged')
 " Plug 'prabirshrestha/asyncomplete-lsp.vim'
 " Plug 'deoplete-plugins/deoplete-go', { 'do': 'make','for':'go'}
 " Plug 'zchee/deoplete-jedi', { 'for': 'python' }
+" Plug 'python-mode/python-mode', { 'branch': 'develop', 'for': 'python' }
 Plug 'morhetz/gruvbox'
 Plug 'itchyny/lightline.vim'
-Plug 'python-mode/python-mode', { 'branch': 'develop', 'for': 'python' }
 Plug 'justinmk/vim-sneak'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tmsvg/pear-tree'
 Plug 'wellle/targets.vim'
 Plug 'junegunn/fzf.vim'
+" Plug 'psf/black'
 call plug#end()
 
 let mapleader=" "
+
+nmap Y y$
 
 " highlight current line, but only in active window
 augroup CursorLineOnlyInActiveWindow
@@ -118,7 +121,7 @@ let g:pear_tree_smart_backspace = 0
 
 
 let g:fzf_buffers_jump = 1
-let g:fzf_layout = { 'right': '~40%' }
+let g:fzf_layout = { 'right': '~50%' }
 let g:fzf_preview_window = ''
 
 nnoremap <silent> <Esc> :nohlsearch<CR><C-L>
@@ -208,3 +211,7 @@ let g:deoplete#sources#jedi#show_docstring = 0
 let g:jedi#completions_enabled = 1
 let g:jedi#goto_definitions_command = "<leader>d"
 let g:pymode_syntax_space_errors = 0
+hi Normal guibg=NONE ctermbg=NONE  
+" hi CursorLine ctermbg=Yellow cterm=bold guibg=#2b2b2b
+hi CursorLine term=underline cterm=underline guibg=NONE
+hi CursorLineNr guibg=NONE cterm=NONE
