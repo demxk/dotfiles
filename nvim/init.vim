@@ -1,29 +1,20 @@
-let g:python3_host_prog = "/usr/bin/python3"
 call plug#begin('~/.local/share/nvim/plugged')
-" Plug 'Shougo/deoplete.nvim' 
-" Plug 'davidhalter/jedi-vim', {'for': 'python'}
-" Plug 'https://github.com/Valloric/YouCompleteMe'
-" Plug 'prabirshrestha/asyncomplete.vim'
-" Plug 'prabirshrestha/async.vim'
-" Plug 'prabirshrestha/vim-lsp'
-" Plug 'prabirshrestha/asyncomplete-lsp.vim'
-" Plug 'deoplete-plugins/deoplete-go', { 'do': 'make','for':'go'}
-" Plug 'zchee/deoplete-jedi', { 'for': 'python' }
-" Plug 'python-mode/python-mode', { 'branch': 'develop', 'for': 'python' }
+Plug 'ycm-core/YouCompleteMe'
+Plug 'dense-analysis/ale'
 Plug 'morhetz/gruvbox'
 Plug 'itchyny/lightline.vim'
 Plug 'justinmk/vim-sneak'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
-Plug 'tmsvg/pear-tree'
+" Plug 'tmsvg/pear-tree'
 Plug 'wellle/targets.vim'
 Plug 'junegunn/fzf.vim'
-" Plug 'psf/black'
 call plug#end()
 
 let mapleader=" "
 
 nmap Y y$
+inoremap <C-j> <Esc>
 
 " highlight current line, but only in active window
 augroup CursorLineOnlyInActiveWindow
@@ -33,10 +24,10 @@ augroup CursorLineOnlyInActiveWindow
 augroup END
 
 nmap <leader>w :w<CR>
-nmap <leader>q :q<CR>
+nmap <leader>q :confirm qa!<CR>
 
 " leave xclipboard untouched after nvim exit
-autocmd vimleave * exe ":!echo " . shellescape(getreg('+')) . " | xclip -selection clipboard"
+" autocmd vimleave * exe ":!echo " . shellescape(getreg('+')) . " | xclip -selection clipboard"
 
 " for netrw ,detele buffers once they are hidden
 autocmd FileType netrw setl bufhidden=delete
@@ -57,7 +48,7 @@ map T <Plug>Sneak_T
 cnoremap <c-j> <down>
 cnoremap <c-k> <up>
 
-nnoremap <leader>jj :<Up>
+nnoremap <leader>k :<Up>
 
 " set background=light
 let g:gruvbox_contrast_light = 'medium'
@@ -89,10 +80,19 @@ nmap <C-W>- <C-w>2-
 nmap <C-W>> <C-w>2>
 nmap <C-W>< <C-w>2<
 nmap <C-W>+ <C-w>=
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
+" map <C-h> <C-w>h
+" map <C-j> <C-w>j
+" map <C-k> <C-w>k
+" map <C-l> <C-w>l
+
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+let g:ale_echo_msg_format = '[%linter%] %s' 
+let g:ale_linters = {
+\       'python': ['flake8', 'pycodestyle'],
+\}
+
+let g:ale_linters_explicit = 1
 
 set ignorecase
 set smartcase
@@ -100,8 +100,8 @@ set noswapfile
 set noshowmode
 set complete-=i   " disable scanning included files
 set complete-=t   " disable searching tags
-set completeopt=menuone,noinsert,noselect
-set completeopt-=preview
+set completeopt=menu,noinsert,noselect
+" set completeopt-=preview
 set shiftwidth=4
 set softtabstop=4   
 set tabstop=4
@@ -122,7 +122,7 @@ let g:pear_tree_smart_backspace = 0
 
 let g:fzf_buffers_jump = 1
 let g:fzf_layout = { 'right': '~50%' }
-let g:fzf_preview_window = ''
+let g:fzf_preview_window = 'down:50%'
 
 nnoremap <silent> <Esc> :nohlsearch<CR><C-L>
 "create a new buffer (save it with :w ./path/to/FILENAME)
@@ -131,23 +131,34 @@ nnoremap <leader>B :enew<cr>
 nnoremap <leader>bq :bp <bar> bd! #<cr>
 "close all open buffers
 nnoremap <leader>ba :bufdo bd!<cr>
-""Tab to switch to next open buffer
-"nnoremap <Tab> :bnext<cr>
-""Shift + Tab to switch to previous open buffer
-"nnoremap <S-Tab> :bprevious<cr>
-"leader key twice to cycle between last two open buffers
+
+" fzf commands
 nnoremap <silent> <leader><leader> :Buffers<CR>
 nnoremap <silent> <leader>f :Files<CR>
 nnoremap <silent> <leader>t :Tags<CR>
 nnoremap <silent> <leader>s :Rg<CR>
-nnoremap <silent> <leader>h :History:<CR>
+nnoremap <silent> <leader>hc :History:<CR>
+nnoremap <silent> <leader>hf :History<CR>
+nnoremap <silent> <leader>cc :Commands<CR>
+
+" for ycm commands
+nnoremap <leader>jt :YcmCompleter GoTo<CR>
+nnoremap <leader>jd :YcmCompleter GoToDefinition<CR>
+nnoremap <leader>jo :YcmCompleter GoToDeclaration<CR>
+nnoremap <leader>gt :YcmCompleter GetType<CR>
+
+" let g:ycm_min_num_of_chars_for_completion = 88
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_key_list_stop_completion = ['<CR>', '<C-c>']
 
 " Disables automatic commenting on newline:
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " " Enable paste in insert mode
 inoremap <C-R> <C-G>u<C-R>+
+cnoremap <C-R> <C-R>+
 
+let g:python3_host_prog = "/usr/bin/python3"
 
 let g:AutoPairsMultilineClose = 0
 let g:AutoPairsMoveCharacter = ''
@@ -198,20 +209,19 @@ vnoremap C "_C
 nnoremap <leader>d "+d
 vnoremap <leader>d "+d
 
-let g:pymode_options_colorcolumn = 0
+"let g:pymode_options_colorcolumn = 0
 
-"unmap <C-Space>
-let g:jedi#completions_command = "<C-Space>"
+""unmap <C-Space>
+"let g:jedi#completions_command = "<C-Space>"
 
-let g:pymode_python = 'python3'
-let g:deoplete#sources#jedi#enable_typeinfo = 0
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#sources#jedi#show_docstring = 0 
+"let g:pymode_python = 'python3'
+"let g:deoplete#sources#jedi#enable_typeinfo = 0
+"let g:deoplete#enable_at_startup = 1
+"let g:deoplete#sources#jedi#show_docstring = 0 
 
-let g:jedi#completions_enabled = 1
-let g:jedi#goto_definitions_command = "<leader>d"
-let g:pymode_syntax_space_errors = 0
+"let g:jedi#completions_enabled = 1
+"let g:jedi#goto_definitions_command = "<leader>d"
+"let g:pymode_syntax_space_errors = 0
 hi Normal guibg=NONE ctermbg=NONE  
-" hi CursorLine ctermbg=Yellow cterm=bold guibg=#2b2b2b
 hi CursorLine term=underline cterm=underline guibg=NONE
 hi CursorLineNr guibg=NONE cterm=NONE

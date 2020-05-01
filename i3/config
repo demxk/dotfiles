@@ -19,7 +19,6 @@ bindsym $mod+Shift+q kill
 
 
 #for_window [class="active"] border pixel 2
-
 # print screen
 
 bindsym --release $mod+Print exec "scrot -s | x -i"
@@ -143,6 +142,7 @@ bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 #exec --no-startup-id i3-msg 'workspace 2: Web' exec firefox
 # Open specific applications in floating mode
 
+#for_window [".*"] border pixel 0
 for_window [class="Yad"] floating enable
 #for_window [class="Firefox"] workspace $ws2 
 for_window [title="alsamixer"] floating enable border pixel 1
@@ -170,7 +170,8 @@ for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
-
+#for_window [class="^.*"] border pixel 0
+#for_window [title="^.*"] border pixel 0
 
 
 
@@ -193,8 +194,8 @@ bindsym $mod+Shift+e exec pkill -KILL -u $USER
 # Set shut down, restart and locking features
 
 # Autostart applications
-exec --no-startup-id picom -b
-exec --no-startup-id nitrogen --set-auto ~/pics/wallpapers/randall-mackey-mural2.jpg
+#exec  picom --config /etc/xdg/picom.conf
+exec --no-startup-id nitrogen --set-auto pics/wallpapers/Landscapes/wallhaven-26623.png
 exec --no-startup-id nm-applet
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor

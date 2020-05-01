@@ -1,3 +1,44 @@
+[bar/i3wmthemer_bar]
+bottom = false
+font-0 = "Fira Code:size=15"
+fixed-center = false
+
+width = 100%
+height = 30
+radius = 0
+
+background = #d0282828
+/* foreground = #ebdbb2 */
+foreground = #ffffff
+
+
+line-size = 3
+line-color =
+
+border-size = 0
+border-color =
+
+padding-left = 0
+padding-right = 1
+
+module-margin-left = 0
+module-margin-right = 1
+
+/* font-0 = "Source Code Pro Semibold:size=14;1" */
+font-1 = "Font Awesome 5 Free:style=Solid:size=14;1"
+font-2 = "Font Awesome 5 Brands:size=14;1"
+
+modules-left = i3
+modules-center = date
+modules-right = openweathermap-simple keyboard ip wlan pulseaudio battery 
+
+tray-position =
+;tray-padding =
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+
 [module/ip]
 type = custom/script
 
@@ -49,45 +90,6 @@ label-layout-padding = 2
 ;label-indicator-padding = 2
 label-indicator-background = #282828
 
-[bar/i3wmthemer_bar]
-bottom = false
-font-0 = "Fira Code:size=15"
-fixed-center = false
-
-width = 100%
-height = 30
-radius = 0
-
-background = #212020
-/* foreground = #ebdbb2 */
-foreground = #e6e6e6
-
-
-line-size = 3
-line-color =
-
-border-size = 0
-border-color =
-
-padding-left = 0
-padding-right = 1
-
-module-margin-left = 0
-module-margin-right = 1
-
-/* font-0 = "Source Code Pro Semibold:size=14;1" */
-font-1 = "Font Awesome 5 Free:style=Solid:size=14;1"
-font-2 = "Font Awesome 5 Brands:size=14;1"
-
-modules-left = i3
-modules-center = date
-modules-right = openweathermap-simple keyboard ip wlan pulseaudio battery 
-
-tray-position =
-;tray-padding =
-
-cursor-click = pointer
-cursor-scroll = ns-resize
 
 [module/pulseaudio]
 type = internal/pulseaudio
@@ -150,12 +152,12 @@ label-mode-foreground = #1e272b
 label-mode-background = #e5eae8
 
 label-focused = %index%
-label-focused-background = #3b88d9
-label-focused-foreground = #ffffff
+/* label-focused-background = #bbb6b7b8 */
+label-focused-foreground = #55bdfa
 label-focused-padding = 2
 
 label-unfocused = %index%
-label-unfocused-background = #5f7987
+/* label-unfocused-background = #5f7987 */
 label-unfocused-foreground = #e5eae8
 label-unfocused-padding = 2
 
