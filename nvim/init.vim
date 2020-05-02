@@ -1,12 +1,14 @@
 call plug#begin('~/.local/share/nvim/plugged')
-Plug 'ycm-core/YouCompleteMe'
+" Plug 'ycm-core/YouCompleteMe'
+Plug 'Shougo/deoplete.nvim'
+Plug 'deoplete-plugins/deoplete-jedi'
+Plug 'davidhalter/jedi-vim'
 Plug 'dense-analysis/ale'
 Plug 'morhetz/gruvbox'
 Plug 'itchyny/lightline.vim'
 Plug 'justinmk/vim-sneak'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
-" Plug 'tmsvg/pear-tree'
 Plug 'wellle/targets.vim'
 Plug 'junegunn/fzf.vim'
 call plug#end()
@@ -14,6 +16,7 @@ call plug#end()
 let mapleader=" "
 
 nmap Y y$
+nmap D d$
 inoremap <C-j> <Esc>
 
 " highlight current line, but only in active window
@@ -24,7 +27,7 @@ augroup CursorLineOnlyInActiveWindow
 augroup END
 
 nmap <leader>w :w<CR>
-nmap <leader>q :confirm qa!<CR>
+nmap <leader>q :q<CR>
 
 " leave xclipboard untouched after nvim exit
 " autocmd vimleave * exe ":!echo " . shellescape(getreg('+')) . " | xclip -selection clipboard"
@@ -71,8 +74,8 @@ highlight Search ctermbg=white ctermfg=Brown
 
 
 " add spaces below/above
-nnoremap ]<space>  :<c-u>put! =repeat(nr2char(10), v:count1)<cr>'[
-nnoremap [<space>  :<c-u>put =repeat(nr2char(10), v:count1)<cr>
+nnoremap <silent> gj o<Esc>k
+nnoremap <silent> gk O<Esc>j
 
 " resize windows by + - < >
 nmap <C-W>= <C-w>2+
@@ -91,9 +94,9 @@ let g:ale_echo_msg_format = '[%linter%] %s'
 let g:ale_linters = {
 \       'python': ['flake8', 'pycodestyle'],
 \}
-
 let g:ale_linters_explicit = 1
 
+set wildmode=longest,full
 set ignorecase
 set smartcase
 set noswapfile
@@ -149,14 +152,16 @@ nnoremap <leader>gt :YcmCompleter GetType<CR>
 
 " let g:ycm_min_num_of_chars_for_completion = 88
 let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_key_list_stop_completion = ['<CR>', '<C-c>']
-
+let g:ycm_key_list_stop_completion = ['<C-c>']
+let g:ycm_key_list_select_completion = ['<TAB>']
+let g:ycm_server_python_interpreter = '/usr/bin/python'
+let g:ycm_python_binary_path = 'python'
 " Disables automatic commenting on newline:
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " " Enable paste in insert mode
-inoremap <C-R> <C-G>u<C-R>+
 cnoremap <C-R> <C-R>+
+inoremap <C-R> <C-G>u<C-R>+
 
 let g:python3_host_prog = "/usr/bin/python3"
 
@@ -212,16 +217,20 @@ vnoremap <leader>d "+d
 "let g:pymode_options_colorcolumn = 0
 
 ""unmap <C-Space>
-"let g:jedi#completions_command = "<C-Space>"
-
-"let g:pymode_python = 'python3'
-"let g:deoplete#sources#jedi#enable_typeinfo = 0
-"let g:deoplete#enable_at_startup = 1
-"let g:deoplete#sources#jedi#show_docstring = 0 
-
-"let g:jedi#completions_enabled = 1
-"let g:jedi#goto_definitions_command = "<leader>d"
-"let g:pymode_syntax_space_errors = 0
+let g:deoplete#enable_at_startup = 1
+inoremap <expr><C-g>            deoplete#cancel_popup()
+inoremap <expr><C-c>            deoplete#close_popup()
+inoremap <expr><C-SPACE>        deoplete#manual_complete()
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+inoremap <expr><s-tab> pumvisible() ? "\<c-p>" : "\<tab>"
+let g:deoplete#sources#jedi#show_docstring = 0 
+let g:jedi#completions_enabled = 0
+let g:jedi#show_call_signatures = "0"
+let g:jedi#smart_auto_mappings = 1
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function() abort
+  return deoplete#close_popup() . "\<CR>"
+endfunction
 hi Normal guibg=NONE ctermbg=NONE  
 hi CursorLine term=underline cterm=underline guibg=NONE
 hi CursorLineNr guibg=NONE cterm=NONE
