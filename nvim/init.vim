@@ -1,23 +1,32 @@
 call plug#begin('~/.local/share/nvim/plugged')
-" Plug 'ycm-core/YouCompleteMe'
+
 Plug 'Shougo/deoplete.nvim'
 Plug 'deoplete-plugins/deoplete-jedi'
 Plug 'davidhalter/jedi-vim'
-Plug 'dense-analysis/ale'
-Plug 'morhetz/gruvbox'
+
+" Plug 'dense-analysis/ale'
+" Plug 'arcticicestudio/nord-vim'
+" Plug 'morhetz/gruvbox'
+Plug 'joshdick/onedark.vim'
 Plug 'itchyny/lightline.vim'
+
 Plug 'justinmk/vim-sneak'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'wellle/targets.vim'
+
 Plug 'junegunn/fzf.vim'
+Plug 'airblade/vim-rooter'
+
 call plug#end()
 
 let mapleader=" "
 
-nmap Y y$
 nmap D d$
+nmap Y y$
 inoremap <C-j> <Esc>
+nnoremap <Tab> :bn<CR>
+nnoremap <S-Tab> :bp<CR>
 
 " highlight current line, but only in active window
 augroup CursorLineOnlyInActiveWindow
@@ -53,17 +62,18 @@ cnoremap <c-k> <up>
 
 nnoremap <leader>k :<Up>
 
-" set background=light
-let g:gruvbox_contrast_light = 'medium'
-let g:gruvbox_contrast_dark = "medium"
-colorscheme gruvbox
+" set background=l
+" let g:gruvbox_contrast_light = 'medium'
+" let g:gruvbox_contrast_dark = ""
+let g:gruvbox_contrast_dark = "soft"
+colorscheme onedark
 let g:lightline = {
             \ 'component': {
             \   'lineinfo': '%3l,%-2v',
             \ },
             \ 'active': {
-            \   'right': [ [ 'lineinfo' ], [ 'percent' ],
-            \              ]
+            \   'right': [ [ 'lineinfo' ], [ 'percent' ],],
+            \   'left':  [ [ 'mode', 'paste'], ['readonly', 'absolutepath', 'modified']]
             \ },
             \ 'component_function': {
             \   'gitbranch': 'FugitiveHead'
@@ -78,18 +88,14 @@ nnoremap <silent> gj o<Esc>k
 nnoremap <silent> gk O<Esc>j
 
 " resize windows by + - < >
-nmap <C-W>= <C-w>2+
-nmap <C-W>- <C-w>2-
-nmap <C-W>> <C-w>2>
-nmap <C-W>< <C-w>2<
-nmap <C-W>+ <C-w>=
-" map <C-h> <C-w>h
-" map <C-j> <C-w>j
-" map <C-k> <C-w>k
-" map <C-l> <C-w>l
+" nmap <C-W>= <C-w>2+
+" nmap <C-W>- <C-w>2-
+" nmap <C-W>> <C-w>2>
+" nmap <C-W>< <C-w>2<
+" nmap <C-W>+ <C-w>=
 
-nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-nmap <silent> <C-j> <Plug>(ale_next_wrap)
+" nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+" nmap <silent> <C-j> <Plug>(ale_next_wrap)
 let g:ale_echo_msg_format = '[%linter%] %s' 
 let g:ale_linters = {
 \       'python': ['flake8', 'pycodestyle'],
@@ -174,6 +180,11 @@ nnoremap <M-j> :m+<cr>==
 xnoremap <M-k> :m-2<cr>gv=gv
 xnoremap <M-j> :m'>+<cr>gv=gv
 
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+
 " paste with newline in normal mode
 nmap <leader>p o<esc>p
 
@@ -213,8 +224,6 @@ vnoremap C "_C
 " delete to clipboard
 nnoremap <leader>d "+d
 vnoremap <leader>d "+d
-
-"let g:pymode_options_colorcolumn = 0
 
 ""unmap <C-Space>
 let g:deoplete#enable_at_startup = 1

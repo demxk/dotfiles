@@ -1,5 +1,5 @@
 set $mod Mod4
-default_border pixel 1
+default_border pixel 2
 default_floating_border pixel 2
 smart_borders on
 hide_edge_borders smart

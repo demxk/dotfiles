@@ -1,11 +1,4 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =9
-let g:netrw_dirhist_1='/home/demxk/.local/share/nvim/plugged/ale/autoload/ale'
-let g:netrw_dirhist_2='/home/demxk/.local/share/nvim/plugged/ale/autoload/ale/engine'
-let g:netrw_dirhist_3='/home/demxk/.local/share/nvim/plugged/ale/autoload/ale/fix'
-let g:netrw_dirhist_4='/home/demxk/.local/share/nvim/plugged/ale/autoload/ale'
-let g:netrw_dirhist_5='/home/demxk/.local/share/nvim/plugged/ale/autoload/ale/fixers'
-let g:netrw_dirhist_6='/home/demxk/.local/share/nvim/plugged/ale/autoload/ale'
-let g:netrw_dirhist_7='/home/demxk/.local/share/nvim/plugged/ale/autoload/ale/gradle'
-let g:netrw_dirhist_8='/home/demxk/.local/share/nvim/plugged/ale/autoload/ale'
-let g:netrw_dirhist_9='/home/demxk/.local/share/nvim/plugged/ale/autoload/ale/handlers'
+let g:netrw_dirhist_cnt =2
+let g:netrw_dirhist_1='/home/demxk/projects/go'
+let g:netrw_dirhist_2='/home/demxk/missing-semester/_2019'
