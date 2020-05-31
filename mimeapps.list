@@ -15,6 +15,7 @@ application/x-extension-xhtml=userapp-Nightly-0IY89Z.desktop;
 application/x-extension-xht=userapp-Nightly-0IY89Z.desktop;
 text/plain=sublime_text.desktop;
 application/pdf=google-chrome.desktop;
+text/x-csrc=sublime_text.desktop;
 
 [Default Applications]
 text/html=userapp-Nightly-0IY89Z.desktop

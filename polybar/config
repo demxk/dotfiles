@@ -1,6 +1,6 @@
 [bar/i3wmthemer_bar]
 bottom = false
-font-0 = "Fira Code:size=15"
+font-0 = "Inconsolata:size=18"
 fixed-center = false
 
 width = 100%
@@ -28,9 +28,9 @@ module-margin-right = 1
 font-1 = "Font Awesome 5 Free:style=Solid:size=14;1"
 font-2 = "Font Awesome 5 Brands:size=14;1"
 
-/* modules-left = em */
-modules-center = date
-modules-right = openweathermap-simple keyboard ip wlan pulseaudio battery 
+modules-left = i3
+modules-center = time
+modules-right = date openweathermap-simple keyboard wlan pulseaudio battery 
 
 tray-position =
 ;tray-padding =
@@ -72,7 +72,10 @@ type = internal/xkeyboard
 format = | <label-layout> 
 ;label-indicator>
 ;format-spacing = 3
-
+label-indicator = %name%
+layout-icon-default = some-icon
+layout-icon-0 = ru;R
+layout-icon-1 = us;U
 ; Available tokens:
 ;   %layout%
 ;   %name%
@@ -96,12 +99,18 @@ type = internal/pulseaudio
 sink = alsa_output.pci-0000_00_1f.3.analog-stereo
 use-ui-max = true
 interval = 5
-format-volume = | <label-volume>
+format-volume = |  <ramp-volume><label-volume>
 format-muted = | <label-muted>
-label-volume =  %percentage%%
+label-volume = %percentage%%
+/* label-muted = muted */
 label-muted = muted
 label-muted-foreground = #666
-label-volume-padding = 2
+
+; Only applies if <ramp-volume> is used
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+label-volume-padding = 1
 
 
 
@@ -134,11 +143,9 @@ animation-discharging-framerate = 500
 label-charging = %percentage%%
 label-discharging = %percentage%%
 format-charging-padding = 0
-format-charging-foreground = #
-; format-charging-background = #e5eae8
 format-discharging-padding = 0
-; format-discharging-background = #e5eae8
-
+ramp-capacity-0-foreground = #eb5957
+ramp-capacity-1-foreground = #eb5957
 
 
 [module/i3]
@@ -191,15 +198,21 @@ ramp-signal-foreground = #5eb5e
 ramp-signal-4 = 
 
 
-[module/date]
+[module/time]
 type = internal/date
-interval = 1
-date = " %d-%m "
+interval = 30
 ;format-prefix = 
 time = %H:%M
 format-padding = 2
-label = "  %time% %date% "
+label = "  %time% "
 
+[module/date]
+type = internal/date
+interval = 600
+date = " %a %d-%m "
+format-padding = 2
+label = " %date% "
+format = <label> |
 
 [settings]
 screenchange-reload = true

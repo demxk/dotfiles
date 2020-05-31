@@ -21,6 +21,10 @@ bindsym $mod+Shift+q kill
 #for_window [class="active"] border pixel 2
 # print screen
 
+bindsym XF86AudioRaiseVolume exec pactl set-sink-mute 0 false && pactl set-sink-volume 0 +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -5%
+bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
+bindsym XF86AudioMicMute exec pactl set-source-mute 0 toggle
 bindsym --release $mod+Print exec "scrot -s | x -i"
 bindsym --release Print exec "scrot '/home/demxk/pics/%s.png'"
 bindsym XF86MonBrightnessUp exec light -A 5
@@ -31,9 +35,6 @@ bindsym XF86Favorites exec light -U 5 # decrease screen brightness
 # start program launcher
 bindsym $mod+d exec --no-startup-id rofi -show run
 bindsym $mod+p exec --no-startup-id rofi -show drun
-bindsym XF86AudioRaiseVolume exec pactl set-sink-mute 0 false && pactl set-sink-volume 0 +5%
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -5%
-bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
 
 # change focus
 bindsym $mod+j focus down 

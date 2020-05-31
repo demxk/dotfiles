@@ -9,6 +9,7 @@ Plug 'davidhalter/jedi-vim'
 " Plug 'morhetz/gruvbox'
 Plug 'joshdick/onedark.vim'
 Plug 'itchyny/lightline.vim'
+" Plug 'sheerun/vim-polyglot'
 
 Plug 'justinmk/vim-sneak'
 Plug 'tpope/vim-commentary'
@@ -17,6 +18,8 @@ Plug 'wellle/targets.vim'
 
 Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-rooter'
+
+" Plug 'rust-lang/rust.vim'
 
 call plug#end()
 
@@ -78,7 +81,7 @@ let g:lightline = {
             \ 'component_function': {
             \   'gitbranch': 'FugitiveHead'
             \ },
-            \ 'colorscheme': 'one',
+            \ 'colorscheme': 'onedark',
             \ }
 highlight Search ctermbg=white ctermfg=Brown
 
