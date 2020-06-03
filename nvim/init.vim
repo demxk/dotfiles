@@ -1,35 +1,76 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
-Plug 'Shougo/deoplete.nvim'
-Plug 'deoplete-plugins/deoplete-jedi'
-Plug 'davidhalter/jedi-vim'
+" Plug 'Shougo/deoplete.nvim', { 'for': 'python' }
+" Plug 'deoplete-plugins/deoplete-jedi', { 'for': 'python' }
+" Plug 'davidhalter/jedi-vim'
 
-" Plug 'dense-analysis/ale'
+
 " Plug 'arcticicestudio/nord-vim'
 " Plug 'morhetz/gruvbox'
+
+
+Plug 'dense-analysis/ale'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" Colors
 Plug 'joshdick/onedark.vim'
 Plug 'itchyny/lightline.vim'
-" Plug 'sheerun/vim-polyglot'
+Plug 'mengelbrecht/lightline-bufferline'
+Plug 'sheerun/vim-polyglot'
+
+Plug 'tpope/vim-commentary'
 
 Plug 'justinmk/vim-sneak'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
 Plug 'wellle/targets.vim'
 
-Plug 'junegunn/fzf.vim'
+" git
+Plug 'tpope/vim-fugitive'
+Plug 'junegunn/gv.vim'
+
+" fzf
 Plug 'airblade/vim-rooter'
+Plug 'junegunn/fzf.vim'
 
 " Plug 'rust-lang/rust.vim'
 
+" Plug 'autozimu/LanguageClient-neovim', {
+"     \ 'branch': 'next',
+"     \ 'do': 'bash install.sh',
+"     \ }
+" Plug 'natebosch/vim-lsc'
+
 call plug#end()
+
+let g:coc_disable_startup_warning = 1
+
+set showtabline=2
+
+let g:lsc_server_commands = {'python': 'pyls'}
+let g:lsc_auto_map = v:true
+
+" nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+" " Or map each action separately
+" nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+" nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+" nnoremap <silent> gr :call LanguageClient#textDocument_rename()<CR>
 
 let mapleader=" "
 
-nmap D d$
+" smart case in sneak
+let g:sneak#use_ic_scs = 1
+
+let g:LanguageClient_serverCommands = {
+    \ 'python': ['pyls'],
+    \ }
+
+nmap D ld$
 nmap Y y$
+nmap Q :q<cr>
+
 inoremap <C-j> <Esc>
-nnoremap <Tab> :bn<CR>
-nnoremap <S-Tab> :bp<CR>
+" nnoremap <Tab> :bn<CR>
+" nnoremap <S-Tab> :bp<CR>
 
 " highlight current line, but only in active window
 augroup CursorLineOnlyInActiveWindow
@@ -38,8 +79,13 @@ augroup CursorLineOnlyInActiveWindow
     autocmd WinLeave * setlocal nocursorline
 augroup END
 
+autocmd FileType json syntax match Comment +\/\/.\+$+
+
+" Help Vim recognize *.sbt and *.sc as Scala files
+au BufRead,BufNewFile *.sbt,*.sc set filetype=scala
+
 nmap <leader>w :w<CR>
-nmap <leader>q :q<CR>
+nmap <leader>q :bp <bar> bd! #<cr>
 
 " leave xclipboard untouched after nvim exit
 " autocmd vimleave * exe ":!echo " . shellescape(getreg('+')) . " | xclip -selection clipboard"
@@ -48,16 +94,13 @@ nmap <leader>q :q<CR>
 autocmd FileType netrw setl bufhidden=delete
 
 " disable Ex mode
-nnoremap Q <nop>
 
 " Ctrl-k - delete til end of line in insert mode
 inoremap <C-k> <C-o>C
 
 " replace f/F/t/T with sneakF
-map f <Plug>Sneak_f
-map F <Plug>Sneak_F
-map t <Plug>Sneak_t
-map T <Plug>Sneak_T
+nmap f <Plug>Sneak_s
+nmap F <Plug>Sneak_S
 
 " ctrl +j/k for command line history
 cnoremap <c-j> <down>
@@ -65,37 +108,43 @@ cnoremap <c-k> <up>
 
 nnoremap <leader>k :<Up>
 
-" set background=l
-" let g:gruvbox_contrast_light = 'medium'
-" let g:gruvbox_contrast_dark = ""
 let g:gruvbox_contrast_dark = "soft"
 colorscheme onedark
 let g:lightline = {
             \ 'component': {
             \   'lineinfo': '%3l,%-2v',
+            \   'buffs': 'buffers',
+            \ },
+            \ 'mode_map': {
+            \ 'n': 'N',
+            \ 'i': 'I',
+            \ 'v': 'V',
+            \ 'V': 'VL',
+            \ "\<C-v>": 'VB',
+            \ },
+            \ 'tabline': {
+            \   'left': [ ['buffers'] ],
+            \   'right': [[ 'buffs' ]]
+            \ },
+            \ 'component_expand': {
+            \   'buffers': 'lightline#bufferline#buffers'
+            \ },
+            \ 'component_type': {
+            \   'buffers': 'tabsel'
             \ },
             \ 'active': {
-            \   'right': [ [ 'lineinfo' ], [ 'percent' ],],
-            \   'left':  [ [ 'mode', 'paste'], ['readonly', 'absolutepath', 'modified']]
+            \   'left':  [ [ 'mode'], ['readonly', 'relativepath', 'modified']],
+            \   'right': [ [ 'lineinfo' ], [ 'percent' ],[ 'filetype' ]],
             \ },
             \ 'component_function': {
             \   'gitbranch': 'FugitiveHead'
             \ },
             \ 'colorscheme': 'onedark',
             \ }
-highlight Search ctermbg=white ctermfg=Brown
-
 
 " add spaces below/above
 nnoremap <silent> gj o<Esc>k
 nnoremap <silent> gk O<Esc>j
-
-" resize windows by + - < >
-" nmap <C-W>= <C-w>2+
-" nmap <C-W>- <C-w>2-
-" nmap <C-W>> <C-w>2>
-" nmap <C-W>< <C-w>2<
-" nmap <C-W>+ <C-w>=
 
 " nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 " nmap <silent> <C-j> <Plug>(ale_next_wrap)
@@ -106,6 +155,7 @@ let g:ale_linters = {
 let g:ale_linters_explicit = 1
 
 set wildmode=longest,full
+set signcolumn=yes
 set ignorecase
 set smartcase
 set noswapfile
@@ -228,21 +278,36 @@ vnoremap C "_C
 nnoremap <leader>d "+d
 vnoremap <leader>d "+d
 
+inoremap <silent><expr> <c-space> coc#refresh()
+
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+inoremap <silent><expr><Tab>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+
 ""unmap <C-Space>
 let g:deoplete#enable_at_startup = 1
 inoremap <expr><C-g>            deoplete#cancel_popup()
 inoremap <expr><C-c>            deoplete#close_popup()
-inoremap <expr><C-SPACE>        deoplete#manual_complete()
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-inoremap <expr><s-tab> pumvisible() ? "\<c-p>" : "\<tab>"
+" inoremap <expr><C-SPACE>        deoplete#manual_complete()
+" inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+" inoremap <expr><s-tab> pumvisible() ? "\<c-p>" : "\<tab>"
 let g:deoplete#sources#jedi#show_docstring = 0 
 let g:jedi#completions_enabled = 0
-let g:jedi#show_call_signatures = "0"
 let g:jedi#smart_auto_mappings = 1
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function() abort
-  return deoplete#close_popup() . "\<CR>"
-endfunction
+let g:jedi#show_call_signatures = "2"
+" inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+" function! s:my_cr_function() abort
+"   return deoplete#close_popup() . "\<CR>"
+" endfunction
 hi Normal guibg=NONE ctermbg=NONE  
 hi CursorLine term=underline cterm=underline guibg=NONE
-hi CursorLineNr guibg=NONE cterm=NONE
+hi CursorLineNr guibg=NONE guifg=#81b9db

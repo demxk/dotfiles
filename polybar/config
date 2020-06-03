@@ -1,16 +1,14 @@
-[bar/i3wmthemer_bar]
+[bar/my_bar]
 bottom = false
-font-0 = "Inconsolata:size=18"
-fixed-center = false
+font-0 = "JetBrainsMono Nerd Font Mono:style=Regular:size=16"
+fixed-center = true
 
 width = 100%
-height = 30
+height = 35
 radius = 0
 
 background = #d0282828
-/* foreground = #ebdbb2 */
 foreground = #ffffff
-
 
 line-size = 3
 line-color =
@@ -19,54 +17,65 @@ border-size = 0
 border-color =
 
 padding-left = 0
-padding-right = 1
-
+padding-right = 2
 module-margin-left = 0
 module-margin-right = 1
 
-/* font-0 = "Source Code Pro Semibold:size=14;1" */
-font-1 = "Font Awesome 5 Free:style=Solid:size=14;1"
-font-2 = "Font Awesome 5 Brands:size=14;1"
-
-modules-left = i3
+modules-left = bspwm
 modules-center = time
 modules-right = date openweathermap-simple keyboard wlan pulseaudio battery 
 
-tray-position =
-;tray-padding =
-
+/* wm-restack = bspwm */
 cursor-click = pointer
 cursor-scroll = ns-resize
 
-
-[module/ip]
-type = custom/script
-
-; Available tokens:
-;   %counter%
-; Command to be executed (using "/usr/bin/env sh -c [command]")
-exec = echo "| $(ip addr show wlp2s0 | head -3 | tail -1 | cut -d' ' -f6)"
-
-; Conditional command that, if defined, needs to exit successfully
-; before the main exec command is invoked.
-; Default: ""
-;exec-if = pgrep -x myservice
-
-; Will the script output continous content?
-; Default: false
-tail = false
-
-; Seconds to sleep between updates
-; Default: 5 (0 if `tail = true`)
-interval = 1
+-------------------------------------
+[colors]
+;background = ${xrdb:color0:#222}
+background = #222
+background-alt = #444
+;foreground = ${xrdb:color7:#222}
+foreground = #c7c7c7
+foreground-alt = #556266
+primary = #4fdaf0
+secondary = #1ec5f7
 
 
+------------------------------------
+[module/bspwm]
+type = internal/bspwm
+
+label-focused = %index%
+/* label-focused-background = ${colors.background} */
+label-focused-foreground = ${colors.secondary}
+label-focused-underline= ${colors.primary}
+label-focused-padding = 2
+
+label-occupied = %index%
+label-occupied-padding = 2;
+
+label-empty = %index%
+label-empty-foreground = ${colors.foreground-alt}
+label-empty-padding = 2
+
+format = <label-state> |  <label-mode>
+
+label-tiled = "[]="
+label-monocle = "[M]"
+
+
+
+
+-------------------------------------------
 [module/openweathermap-simple]
 type = custom/script
 exec = ~/cfgs/polybar-scripts/polybar-scripts/openweathermap-simple/openweathermap-simple.sh
 interval = 600
 label-font = 3
 
+
+
+-----------------------------------------
 [module/keyboard]
 type = internal/xkeyboard
 format = | <label-layout> 
@@ -94,6 +103,7 @@ label-layout-padding = 2
 label-indicator-background = #282828
 
 
+ ----------------------------------------
 [module/pulseaudio]
 type = internal/pulseaudio
 sink = alsa_output.pci-0000_00_1f.3.analog-stereo
@@ -116,12 +126,13 @@ label-volume-padding = 1
 
 
 
+---------------------------------
 [module/battery]
 type = internal/battery
 full-at = 100
 battery = BAT0
 adapter = ADP1
-
+label-foreground = #b7d9a5
 poll=itnerval = 10
 format-charging = | <animation-charging> <label-charging>
 format-discharging = | <animation-discharging> <label-discharging>
@@ -148,6 +159,7 @@ ramp-capacity-0-foreground = #eb5957
 ramp-capacity-1-foreground = #eb5957
 
 
+-------------------------------
 [module/i3]
 type = internal/i3
 format = <label-state> <label-mode>
@@ -180,6 +192,7 @@ label-urgent-padding = 2
 
 
 
+------------------------------------
 [module/wlan]
 type = internal/network
 interface = wlp2s0
@@ -193,11 +206,14 @@ ramp-signal-0 = 
 ramp-signal-1 = 
 ramp-signal-2 = 
 ramp-signal-3 = 
-ramp-signal-foreground = #5eb5e
-
+/* ramp-signal-foreground = #5eb5e */
 ramp-signal-4 = 
+ramp-signal-foreground = #a5d9d3
+label-connected-foreground = #a5d9d3
 
 
+
+------------------------------
 [module/time]
 type = internal/date
 interval = 30
@@ -205,7 +221,11 @@ interval = 30
 time = %H:%M
 format-padding = 2
 label = "  %time% "
+label-foreground = #f7f7d0
 
+
+
+------------------------------
 [module/date]
 type = internal/date
 interval = 600
@@ -213,6 +233,7 @@ date = " %a %d-%m "
 format-padding = 2
 label = " %date% "
 format = <label> |
+label-foreground = #edd1e7
 
 [settings]
 screenchange-reload = true

@@ -1,4 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =2
+let g:netrw_dirhist_cnt =4
 let g:netrw_dirhist_1='/home/demxk/projects/go'
 let g:netrw_dirhist_2='/home/demxk/missing-semester/_2019'
+let g:netrw_dirhist_3='/home/demxk/projects/python/pytorch'
+let g:netrw_dirhist_4='/home/demxk/.config/sxhkd'
