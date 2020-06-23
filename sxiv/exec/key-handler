@@ -2,12 +2,10 @@
 while read file
 do
         case "$1" in
-        "C-d")
-                mv "$file" ~/.trash ;;
         "C-r")
                 convert -rotate 90 "$file" "$file" ;;
         "C-c")
-                echo -n "$file" | xclip -selection clipboard ;;
+                echo -n "$file" | o ;;
         "C-w")
                 nitrogen --save --set-zoom-fill "$file" ;;
         esac

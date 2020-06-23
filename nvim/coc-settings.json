@@ -1,0 +1,7 @@
+{
+    "python.linting.enabled": false,
+    "python.autoUpdateLanguageServer": false,
+    "rust-analyzer.serverPath": "~/dots/coc/extensions/coc-rust-analyzer-data/rust-analyzer",
+    "yank.enableCompletion": false,
+    "yank.list.maxsize": 10
+}

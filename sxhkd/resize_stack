@@ -1,0 +1,7 @@
+#!/usr/bin/zsh
+
+bspc subscribe node_{remove,add} | while read _; do stack_layout; done
+# while read -r _; do
+#     bspc node @/2 -B; 
+# done < <(bspc subscribe node_add node_remove)
+

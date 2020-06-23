@@ -1,7 +1,7 @@
 [bar/my_bar]
 bottom = false
-font-0 = "JetBrainsMono Nerd Font Mono:style=Regular:size=16"
-fixed-center = true
+font-0 = "JetBrainsMono Nerd Font Mono:style=Regular:size=15,1"
+fixed-center = false
 
 width = 100%
 height = 35
@@ -17,13 +17,13 @@ border-size = 0
 border-color =
 
 padding-left = 0
-padding-right = 2
+padding-right = 1
 module-margin-left = 0
 module-margin-right = 1
 
-modules-left = bspwm
+modules-left = bspwm bspwm_info
 modules-center = time
-modules-right = date openweathermap-simple keyboard wlan pulseaudio battery 
+modules-right = date openweathermap-simple keyboard wlan pulseaudio battery
 
 /* wm-restack = bspwm */
 cursor-click = pointer
@@ -37,14 +37,32 @@ background-alt = #444
 ;foreground = ${xrdb:color7:#222}
 foreground = #c7c7c7
 foreground-alt = #556266
+green = #93fc62
+purple = #edd1e7
 primary = #4fdaf0
 secondary = #1ec5f7
 
+[module/battery-combined-udev]
+type = custom/script
+exec = ~/cfgs/polybar-scripts/polybar-scripts/battery-combined-udev/battery-combined-udev.sh
+tail = true
+
+______________________________________
+[module/micro_info]
+type = custom/script
+exec = micro_info
+label = %{F#f00} %output%
+interval = 2
+
+______________________________________
+[module/bspwm_info]
+type = custom/script
+exec = bspwm_info
+tail = true
 
 ------------------------------------
 [module/bspwm]
 type = internal/bspwm
-
 label-focused = %index%
 /* label-focused-background = ${colors.background} */
 label-focused-foreground = ${colors.secondary}
@@ -54,7 +72,8 @@ label-focused-padding = 2
 label-occupied = %index%
 label-occupied-padding = 2;
 
-label-empty = %index%
+label-empty =
+/* %index% */
 label-empty-foreground = ${colors.foreground-alt}
 label-empty-padding = 2
 
@@ -117,13 +136,10 @@ label-muted = muted
 label-muted-foreground = #666
 
 ; Only applies if <ramp-volume> is used
-ramp-volume-0 = 
-ramp-volume-1 = 
-ramp-volume-2 = 
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 墳
 label-volume-padding = 1
-
-
-
 
 
 ---------------------------------
@@ -134,30 +150,26 @@ battery = BAT0
 adapter = ADP1
 label-foreground = #b7d9a5
 poll=itnerval = 10
-format-charging = | <animation-charging> <label-charging>
-format-discharging = | <animation-discharging> <label-discharging>
-animation-charging-0 = 
-animation-charging-1 = 
-animation-charging-2 = 
-animation-charging-3 = 
-animation-charging-4 = 
-; Framerate in milliseconds
-animation-charging-framerate = 750
 
-animation-discharging-0 = 
-animation-discharging-1 = 
-animation-discharging-2 = 
-animation-discharging-3 = 
-animation-discharging-4 = 
-; Framerate in milliseconds
-animation-discharging-framerate = 500
-label-charging = %percentage%%
-label-discharging = %percentage%%
+format-full = | full
+
+format-full-foreground = ${colors.green}
+label-charging = %{F#58ed73} %percentage%%
+label-discharging =  %percentage%
 format-charging-padding = 0
 format-discharging-padding = 0
-ramp-capacity-0-foreground = #eb5957
-ramp-capacity-1-foreground = #eb5957
 
+format-charging = | <label-charging>
+format-discharging = |<ramp-capacity> <label-discharging>
+ramp-capacity-0 = %{F#de3a37}
+ramp-capacity-1 = %{F#ffffff}
+ramp-capacity-2 = %{F#ffffff}
+ramp-capacity-3 = %{F#ffffff}
+ramp-capacity-5 = %{F#ffffff}
+ramp-capacity-6 = %{F#ffffff}
+ramp-capacity-7 = %{F#ffffff}
+ramp-capacity-8 = %{F#ffffff}
+ramp-capacity-9 = %{F#ffffff}
 
 -------------------------------
 [module/i3]
@@ -221,7 +233,7 @@ interval = 30
 time = %H:%M
 format-padding = 2
 label = "  %time% "
-label-foreground = #f7f7d0
+/* label-foreground = ${colors.purple} */
 
 
 
@@ -233,11 +245,11 @@ date = " %a %d-%m "
 format-padding = 2
 label = " %date% "
 format = <label> |
-label-foreground = #edd1e7
+/* label-foreground = #edd1e7 */
 
 [settings]
 screenchange-reload = true
 
 /* [global/wm] */
-/* margin-top = 0 */
-/* margin-bottom = 0 */
+margin-top = 2
+margin-bottom = 2

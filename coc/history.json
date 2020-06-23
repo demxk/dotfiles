@@ -3,5 +3,61 @@
     "%2Fhome%2Fdemxk": [
       "err"
     ]
+  },
+  "outline": {
+    "%2Fhome%2Fdemxk": [
+      "lan",
+      "renam"
+    ],
+    "%2Fhome%2Fdemxk%2Fprojects%2Fsharp%2Frec": [
+      "rec"
+    ]
+  },
+  "commands": {
+    "%2Fhome%2Fdemxk": [
+      "python.sort",
+      "py",
+      "pyth",
+      "  ",
+      "r"
+    ]
+  },
+  "extensions": {
+    "%2Fhome%2Fdemxk%2Fprojects%2Frust%2Fcargo_test": [
+      "q"
+    ]
+  },
+  "lists": {
+    "%2Fhome%2Fdemxk": [
+      "com"
+    ],
+    "%2Fhome%2Fdemxk%2Fprojects%2Fsharp%2Frec": [
+      "ser"
+    ]
+  },
+  "yank": {
+    "%2Fhome%2Fdemxk": [
+      "log"
+    ]
+  },
+  "sources": {
+    "%2Fhome%2Fdemxk%2Fprojects%2Frust%2Fconcurrency": [
+      "yan"
+    ]
+  },
+  "symbols": {
+    "%2Fhome%2Fdemxk%2Fprojects%2Fsharp%2Frec": [
+      "jjj"
+    ]
+  },
+  "location": {
+    "%2Fhome%2Fdemxk": [
+      "rec"
+    ]
+  },
+  "snippets": {
+    "%2Fhome%2Fdemxk": [
+      "for"
+    ]
   }
 }
