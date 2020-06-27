@@ -5,6 +5,7 @@
 # terminal emulator
 super + Return
     kitty
+
 # program launcher
 super + d
 	rofi -show run
@@ -44,11 +45,11 @@ super + {-, +}
 
 # F keys
 XF86AudioRaiseVolume   
-    pactl set-sink-mute 0 false && pactl set-sink-volume 0 +5% 
+    amixer set Master 5%+
 XF86AudioLowerVolume
-    pactl set-sink-volume 0 -5%
+    amixer set Master 5%-
 XF86AudioMute
-    pactl set-sink-mute 0 toggle
+    amixer set Master toggle
 XF86AudioMicMute
     pactl set-source-mute 0 toggle
 XF86MonBrightnessUp
@@ -56,9 +57,6 @@ XF86MonBrightnessUp
 XF86MonBrightnessDown
     light -U 5
 
-
-XF86AudioMicMute
-    pamixer --source 1 -t
 
 Print
     maim ~/pics/$(date +%d.%m.%y_%T).png
@@ -171,7 +169,7 @@ super + {h,l}
     resize {-20, 20}
 
 # contrct  window by moving one of its side inward
-super + alt + shift + {h,j,k,l}
+super + alt + {h,j,k,l}
 	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
 
 # move a floating window

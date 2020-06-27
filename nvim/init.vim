@@ -5,40 +5,42 @@ call plug#begin('~/.local/share/nvim/plugged')
 " Plug 'deoplete-plugins/deoplete-jedi', { 'for': 'python' }
 " Plug 'davidhalter/jedi-vim'
 
+" Autocomplete, LSP, Linting
 Plug 'dense-analysis/ale'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Plug 'liuchengxu/vista.vim'
 
 " Colors
 Plug 'rakr/vim-one'
-Plug 'joshdick/onedark.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'mengelbrecht/lightline-bufferline'
 
 " different usefull plugins
+Plug 'mhinz/vim-startify'
 Plug 'tmsvg/pear-tree'
 Plug 'tpope/vim-commentary'
 Plug 'machakann/vim-sandwich'
 Plug 'justinmk/vim-sneak'
+Plug 'mbbill/undotree'
 Plug 'wellle/targets.vim'
 
 " " git
 " Plug 'tpope/vim-fugitive'
 " Plug 'junegunn/gv.vim'
 
-" fzf
+" fuzzy search
 Plug 'airblade/vim-rooter'
-Plug 'yuki-ycino/fzf-preview.vim'
-
+Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
+Plug 'junegunn/fzf.vim'
 Plug 'rust-lang/rust.vim'
 
 call plug#end()
-
+let g:clap_insert_mode_only = v:true
 " to write to maybe non-existing folder/file ..
 augroup Mkdir
   autocmd!
   autocmd BufWritePre * call mkdir(expand("<afile>:p:h"), "p")
 augroup END
+nnoremap <silent> <buffer> <C-g>     :<c-u>call clap#handler#exit()<CR> 
 
 " 0 to first non-black char
 nnoremap 0 ^
@@ -47,18 +49,40 @@ nnoremap ^ 0
 set showtabline=2
 
 let mapleader=" "
-
-nnoremap <silent> <leader>fp            :<C-u>FzfPreviewFromResources project_mru git<CR>
-nnoremap <silent> <leader>fgs           :<C-u>FzfPreviewGitStatus<CR>
-nnoremap <silent> <leader><leader>      :<C-u>FzfPreviewBuffers<CR>
+" Open new file adjacent to current files
+nnoremap <C-x><C-f> :e <C-R>=expand("%:p:h") . "/" <CR>
+nnoremap <silent> <leader>fp            :<C-u>Clap gfiles<CR>
+nnoremap <silent> <leader>fgs           :<C-u>Clap history<CR>
+nnoremap <silent> <leader><leader>      :<C-u>Clap buffers<CR>
 " nnoremap <silent> <leader>fB            :<C-u>FzfPreviewAllBuffers<CR>
-nnoremap <silent> <leader>ff            :<C-u>FzfPreviewFromResources directory project_mru<CR>
+nnoremap <silent> <leader>ff            :<C-u>Clap files<CR>
 nnoremap <silent> <leader>fo            :<C-u>FzfPreviewFromResources buffer project_mru<CR>
 nnoremap <silent> <leader>f<C-o>        :<C-u>FzfPreviewJumps<CR>
 nnoremap <silent> <leader>ft            :<C-u>FzfPreviewBufferTags<CR>
 nnoremap <silent> <leader>fq            :<C-u>FzfPreviewQuickFix<CR>
 nnoremap <silent> <leader>fl            :<C-u>FzfPreviewLocationList<CR>
 
+" let $FZF_DEFAULT_OPTS .= ' --layout=reverse'
+
+"   function! FloatingFZF()
+"     let height = &lines
+"     let width = float2nr(&columns - (&columns * 2 / 10))
+"     let col = float2nr((&columns - width) / 2)
+"     let col_offset = &columns / 10
+"     let opts = {
+"           \ 'relative': 'editor',
+"           \ 'row': 1,
+"           \ 'col': col + col_offset,
+"           \ 'width': width * 2 / 1,
+"           \ 'height': height / 2,
+"           \ 'style': 'minimal'
+"           \ }
+"     let buf = nvim_create_buf(v:false, v:true)
+"     let win = nvim_open_win(buf, v:true, opts)
+"     call setwinvar(win, '&winhl', 'NormalFloat:TabLine')
+"   endfunction
+
+"   let g:fzf_layout = { 'window': 'call FloatingFZF()' }
 " source config
 nnoremap <silent> <leader>rr    :<C-u>source ~/dots/nvim/init.vim<CR>
 
@@ -128,8 +152,6 @@ cnoremap <c-k> <up>
 
 nnoremap <leader>k :<Up>
 
-" colorscheme darkblue
-colorscheme one
 let g:lightline = {
             \ 'component': {
             \   'lineinfo': '%3l,%-2v',
@@ -159,8 +181,10 @@ let g:lightline = {
             \ 'component_function': {
             \   'cocstatus': 'coc#status'
             \ },
-            \ 'colorscheme': 'onedark',
+            \ 'colorscheme': 'one',
             \ }
+
+colorscheme one
 
 function! LightlineFilename()
   return expand('%:t') !=# '' ? @% : '[No Name]'
@@ -214,9 +238,9 @@ set diffopt+=iwhite " No whitespace in vimdiff
 let g:fzf_buffers_jump = 1
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 " let g:fzf_preview_window = 'down:50%'
-let g:fzf_preview_window = 'right:70%:hidden' 
+" let g:fzf_preview_window = 'right:70%:hidden' 
 
-nnoremap <silent> <Esc> :nohlsearch<CR><C-L>
+" nnoremap <silent> <Esc> :nohlsearch<CR><C-L>
 
 "create a new buffer (save it with :w ./path/to/FILENAME)
 nnoremap <leader>B :enew<cr>
@@ -253,7 +277,7 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 cnoremap <C-R> <C-R>+
 inoremap <C-R> <C-G>u<C-R>+
 
-let g:python3_host_prog = "/usr/bin/python3"
+let g:python3_host_prog = "/bin/python"
 
 "Move lines up and down"
 nnoremap <C-Up> :m-2<cr>==
@@ -327,8 +351,17 @@ inoremap <silent><expr><S-Tab>
 imap <C-j> <Plug>(coc-snippets-expand-jump)
 imap <C-k> <Plug>(coc-snippets-expand)
 
-" inoremap <silent><expr> <cr> coc#expandable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" : "\<CR>"
-inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+" inoremap <silent><expr> <cr> coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" : "\<CR>"
+" inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" inoremap <silent><expr> <CR>
+"       \ pumvisible() ? coc#_select_confirm() :
+"       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+"       \ "\<CR>"
+
+" \ <SID>check_back_space() ? "\<CR>" :
+" \ coc#refresh()
+
 imap <C-c> <C-e>
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
@@ -368,8 +401,8 @@ nmap <leader>f  <Plug>(coc-format-selected)
 " nmap <leader>qf  <Plug>(coc-fix-current)
 
 " Find symbol of current document.
-nnoremap <silent><nowait> <space>re  :<C-u>CocList outline<cr>
-nnoremap <silent><nowait> <space>ll  :<C-u>CocListResume<cr>
+nnoremap <silent><nowait> <leader>out  :<C-u>CocList outline<cr>
+nnoremap <silent><nowait> <leader>re  :<C-u>CocListResume<cr>
 
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')

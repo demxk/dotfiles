@@ -23,7 +23,7 @@ module-margin-right = 1
 
 modules-left = bspwm bspwm_info
 modules-center = time
-modules-right = date openweathermap-simple keyboard wlan pulseaudio battery
+modules-right = date openweathermap-simple keyboard network alsa battery
 
 /* wm-restack = bspwm */
 cursor-click = pointer
@@ -42,10 +42,6 @@ purple = #edd1e7
 primary = #4fdaf0
 secondary = #1ec5f7
 
-[module/battery-combined-udev]
-type = custom/script
-exec = ~/cfgs/polybar-scripts/polybar-scripts/battery-combined-udev/battery-combined-udev.sh
-tail = true
 
 ______________________________________
 [module/micro_info]
@@ -121,6 +117,55 @@ label-layout-padding = 2
 ;label-indicator-padding = 2
 label-indicator-background = #282828
 
+
+
+
+
+
+
+---------------------------------------------
+[module/alsa]
+type = internal/alsa
+
+; Soundcard to be used
+; Usually in the format hw:# where # is the card number
+; You can find the different card numbers in `/proc/asound/cards`
+master-soundcard = default
+speaker-soundcard = default
+headphone-soundcard = default
+
+; Name of the master, speaker and headphone mixers
+; Use the following command to list available mixer controls:
+; $ amixer scontrols | sed -nr "s/.*'([[:alnum:]]+)'.*/\1/p"
+; If master, speaker or headphone-soundcard isn't the default, 
+; use `amixer -c # scontrols` instead where # is the number 
+; of the master, speaker or headphone soundcard respectively
+;
+; Default: Master
+master-mixer = Master
+
+; Optionally define speaker and headphone mixers
+; Default: none
+speaker-mixer = Speaker
+; Default: none
+headphone-mixer = Headphone
+
+; NOTE: This is required if headphone_mixer is defined
+; Use the following command to list available device controls
+; $ amixer controls | sed -r "/CARD/\!d; s/.*=([0-9]+).*name='([^']+)'.*/printf '%3.0f: %s\n' '\1' '\2'/e" | sort
+; You may also need to use `amixer -c # controls` as above for the mixer names
+; Default: none
+headphone-id = 9
+
+; Interval for volume increase/decrease (in percent points)
+; Default: 5
+interval = 5
+
+format-volume = "|  <ramp-volume> <label-volume> "
+format-muted = | <label-muted>
+label-muted =  muted
+label-muted-foreground = #66
+ramp-volume-0 = 
 
  ----------------------------------------
 [module/pulseaudio]
@@ -205,10 +250,10 @@ label-urgent-padding = 2
 
 
 ------------------------------------
-[module/wlan]
+[module/network]
 type = internal/network
 interface = wlp2s0
-interval = 1.0
+interval = 2.0
 format-connected = | <ramp-signal> <label-connected>
 label-connected = %{A1:echo "dd":} %essid%%{A}
 format-disconnected = | not connected

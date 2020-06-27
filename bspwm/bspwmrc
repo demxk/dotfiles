@@ -1,6 +1,7 @@
 #!/bin/sh
 
 # add_fix &
+pkill sxhkd
 sxhkd &
 pkill polybar
 polybar my_bar &

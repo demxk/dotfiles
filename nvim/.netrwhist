@@ -1,5 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =5
+let g:netrw_dirhistcnt =8
+let g:netrw_dirhist_8='/home/demxk/.local/share/nvim/plugged/lightline.vim'
+let g:netrw_dirhist_7='/home/demxk/.local/share/nvim/plugged'
+let g:netrw_dirhist_6='/etc/modprobe.d'
 let g:netrw_dirhist_5='/home/demxk/projects'
 let g:netrw_dirhist_4='/home/demxk/.config/nvim'
 let g:netrw_dirhist_3='/home/demxk/projects/sharp/rec/tasks/task_cs'
