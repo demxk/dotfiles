@@ -25,7 +25,15 @@
   "extensions": {
     "%2Fhome%2Fdemxk%2Fprojects%2Frust%2Fcargo_test": [
       "q"
-    ]
+    ],
+    "%2Fhome%2Fdemxk%2F": {
+      "config": [
+        "yan"
+      ],
+      "config%2Fnvim": [
+        "yank"
+      ]
+    }
   },
   "lists": {
     "%2Fhome%2Fdemxk": [

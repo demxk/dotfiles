@@ -1,18 +1,15 @@
-map s <Nop>
-map Q <Nop>
 call plug#begin('~/.local/share/nvim/plugged')
 " Plug 'Shougo/deoplete.nvim'
 " Plug 'deoplete-plugins/deoplete-jedi', { 'for': 'python' }
 " Plug 'davidhalter/jedi-vim'
 
 " Autocomplete, LSP, Linting
-Plug 'dense-analysis/ale'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'dense-analysis/ale'
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Colors
 Plug 'rakr/vim-one'
 Plug 'itchyny/lightline.vim'
-Plug 'mengelbrecht/lightline-bufferline'
 
 " different usefull plugins
 Plug 'mhinz/vim-startify'
@@ -20,110 +17,142 @@ Plug 'tmsvg/pear-tree'
 Plug 'tpope/vim-commentary'
 Plug 'machakann/vim-sandwich'
 Plug 'justinmk/vim-sneak'
-Plug 'mbbill/undotree'
 Plug 'wellle/targets.vim'
 
 " " git
 " Plug 'tpope/vim-fugitive'
 " Plug 'junegunn/gv.vim'
 
+" Plug 'lambdalisue/gina.vim/'
+
 " fuzzy search
 Plug 'airblade/vim-rooter'
 Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
-Plug 'junegunn/fzf.vim'
-Plug 'rust-lang/rust.vim'
+
+Plug 'voldikss/vim-floaterm'
 
 call plug#end()
+
+let g:netrw_fastbrowse = 0
+let g:floaterm_autoclose = 2
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 0
+vmap y ygv<Esc>
+nnoremap    <C-t>       :FloatermToggle<CR>
+nnoremap    <leader>tn  :FloatermNew<CR>
+tnoremap    <Esc>       <C-\><C-n>
+tnoremap    <C-t>       <C-\><C-n>:FloatermToggle<CR>
+
+function! GoToNextIndent(inc)
+    " Get the cursor current position
+    let currentPos = getpos('.')
+    let currentLine = currentPos[1]
+    let matchIndent = 0
+
+    " Look for a line with the same indent level whithout going out of the buffer
+    while !matchIndent && currentLine != line('$') + 1 && currentLine != -1
+        let currentLine += a:inc
+        let matchIndent = indent(currentLine) == indent('.')
+    endwhile
+
+    " If a line is found go to this line
+    if (matchIndent)
+        let currentPos[1] = currentLine
+        call setpos('.', currentPos)
+    endif
+endfunction
+
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-h> <C-o>b
+inoremap <C-l> <C-o>w
+nnoremap <C-j> :call GoToNextIndent(1)<CR>
+nnoremap <C-k> :call GoToNextIndent(-1)<CR>
+nnoremap <C-h> ^
+nnoremap <C-l> $
+" ____________________________________________________
+" CLAP CONFIG
+let g:clap_layout = { 'relative': 'editor' }
 let g:clap_insert_mode_only = v:true
+let g:clap_theme = { 
+\ 'clap_default_current_selection': { 'ctermfg': 'green' },
+\ 'clap_display': { 'ctermfg': 'white' }
+\}
+
+augroup FocusAfterClap
+  autocmd!
+  " autocmd User ClapOnEnter   call YourFunction()
+  autocmd User ClapOnExit    call lightline#update()
+augroup END
+
+" ____________________________________________________
+" PEAR_TREE CONFIG
+let g:pear_tree_repeatable_expand = 0
+let g:pear_tree_ft_disabled = ['clap_input']
+let g:pear_tree_map_special_keys = 0
+let g:pear_tree_smart_backspace = 1
+imap <BS> <Plug>(PearTreeBackspace)
+imap <Esc> <Plug>(PearTreeFinishExpansion)
+imap <silent><expr> <CR>
+    \ pumvisible() ? coc#_select_confirm() :
+    \ coc#expandable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand',''])\<CR>" :
+    \ "\<Plug>(PearTreeExpand)"
+
 " to write to maybe non-existing folder/file ..
 augroup Mkdir
   autocmd!
   autocmd BufWritePre * call mkdir(expand("<afile>:p:h"), "p")
 augroup END
-nnoremap <silent> <buffer> <C-g>     :<c-u>call clap#handler#exit()<CR> 
 
-" 0 to first non-black char
-nnoremap 0 ^
-nnoremap ^ 0
+" " 0 to first non-black char
+" nnoremap 0 ^
+" nnoremap ^ 0
 
-set showtabline=2
+" TABLINE 
+" set showtabline=2
 
 let mapleader=" "
-" Open new file adjacent to current files
-nnoremap <C-x><C-f> :e <C-R>=expand("%:p:h") . "/" <CR>
-nnoremap <silent> <leader>fp            :<C-u>Clap gfiles<CR>
-nnoremap <silent> <leader>fgs           :<C-u>Clap history<CR>
+
+" Fuzzy mapping
 nnoremap <silent> <leader><leader>      :<C-u>Clap buffers<CR>
-" nnoremap <silent> <leader>fB            :<C-u>FzfPreviewAllBuffers<CR>
+nnoremap <silent> <leader>fp            :<C-u>Clap gfiles<CR>
+nnoremap <silent> <leader>fh            :<C-u>Clap history<CR>
 nnoremap <silent> <leader>ff            :<C-u>Clap files<CR>
-nnoremap <silent> <leader>fo            :<C-u>FzfPreviewFromResources buffer project_mru<CR>
-nnoremap <silent> <leader>f<C-o>        :<C-u>FzfPreviewJumps<CR>
-nnoremap <silent> <leader>ft            :<C-u>FzfPreviewBufferTags<CR>
-nnoremap <silent> <leader>fq            :<C-u>FzfPreviewQuickFix<CR>
-nnoremap <silent> <leader>fl            :<C-u>FzfPreviewLocationList<CR>
-
-" let $FZF_DEFAULT_OPTS .= ' --layout=reverse'
-
-"   function! FloatingFZF()
-"     let height = &lines
-"     let width = float2nr(&columns - (&columns * 2 / 10))
-"     let col = float2nr((&columns - width) / 2)
-"     let col_offset = &columns / 10
-"     let opts = {
-"           \ 'relative': 'editor',
-"           \ 'row': 1,
-"           \ 'col': col + col_offset,
-"           \ 'width': width * 2 / 1,
-"           \ 'height': height / 2,
-"           \ 'style': 'minimal'
-"           \ }
-"     let buf = nvim_create_buf(v:false, v:true)
-"     let win = nvim_open_win(buf, v:true, opts)
-"     call setwinvar(win, '&winhl', 'NormalFloat:TabLine')
-"   endfunction
-
-"   let g:fzf_layout = { 'window': 'call FloatingFZF()' }
-" source config
-nnoremap <silent> <leader>rr    :<C-u>source ~/dots/nvim/init.vim<CR>
+nnoremap <silent> <leader>fe            :<C-u>Clap filer<CR>
 
 " list yank list
-nnoremap <silent> <leader>y  :<C-u>CocList --normal yank<cr>
+nnoremap <silent> <leader>y             :<C-u>Clap yanks<CR>
 
-" autocmd User targets#mappings#user call targets#mappings#extend({
-"     \ 'b': {
-"     \   'pair': [{'o':'(', 'c':')'}, {'o':'[', 'c':']'}, {'o':'{', 'c':'}'}, {'o':'<', 'c':'>'} ],
-"     \   'quote': [{'d':"'"}, {'d':'"'}, {'d':'`'}],
-"     \ }
-"     \ })
+" source nvim config
+nnoremap <silent> <leader>rr    :<C-u>source ~/dots/nvim/init.vim<CR>
+
+
+" open my nvim config file
+nnoremap <leader>oo :e $MYVIMRC<CR>
+
+
+" Move lines up and down
+nnoremap <M-j> :m+<cr>==
+nnoremap <M-k> :m-2<cr>==
+xnoremap <M-j> :m'>+<cr>gv=gv
+xnoremap <M-k> :m-2<cr>gv=gv
+
+" window resize with Alt + arrows
+nnoremap <M-Up>     :res +3<CR>
+nnoremap <M-Down>   :res -3<CR>
+nnoremap <M-Left>   :vertical res -3<CR>
+nnoremap <M-Right>  :vertical res +3<CR>
 
 
 set timeoutlen=1000
 
-nnoremap <silent> <leader>h <C-w>h
-nnoremap <silent> <leader>j <C-w>j
-nnoremap <silent> <leader>k <C-w>k
-nnoremap <silent> <leader>l <C-w>l
-
-nnoremap <silent> <leader>= <C-w>=
-nnoremap <silent> <C-h> :vertical resize -4<CR>
-nnoremap <silent> <C-j> :resize +4<CR>
-nnoremap <silent> <C-k> :resize -4<CR>
-nnoremap <silent> <C-l> :vertical resize +4<CR>
-
-nnoremap <leader>oo :e $MYVIMRC<CR>
-
-nnoremap <leader>of :Files<CR>
-
-nnoremap <leader>ot :Tags<CR>
-
-nnoremap <leader>oc :Commands<CR>
-
-nnoremap <leader>q  :q!<CR>
 " smart case in sneak
 let g:sneak#use_ic_scs = 1
 
 nmap Y y$
 nmap D ld$
+nmap <leader>w  :w<CR>
+nmap <leader>q  :q!<CR>
 
 " highlight current line, but only in active window
 augroup CursorLineOnlyInActiveWindow
@@ -133,14 +162,7 @@ augroup CursorLineOnlyInActiveWindow
 augroup END
 
 
-nmap <leader>w :w<CR>
 nmap ``         <c-^>
-
-" for netrw ,detele buffers once they are hidden
-" autocmd FileType netrw setl bufhidden=delete
-
-" Ctrl-k - delete til end of line in insert mode
-" inoremap <C-k> <C-o>C
 
 " replace f/F/t/T with sneakF
 nmap f <Plug>Sneak_s
@@ -150,12 +172,9 @@ nmap F <Plug>Sneak_S
 cnoremap <c-j> <down>
 cnoremap <c-k> <up>
 
-nnoremap <leader>k :<Up>
-
 let g:lightline = {
             \ 'component': {
             \   'lineinfo': '%3l,%-2v',
-            \   'buffs': 'buffers',
             \ },
             \ 'mode_map': {
             \ 'n': 'N',
@@ -163,16 +182,6 @@ let g:lightline = {
             \ 'v': 'V',
             \ 'V': 'VL',
             \ "\<C-v>": 'VB',
-            \ },
-            \ 'tabline': {
-            \   'left': [ ['buffers'] ],
-            \   'right': [[ 'buffs' ]]
-            \ },
-            \ 'component_expand': {
-            \   'buffers': 'lightline#bufferline#buffers'
-            \ },
-            \ 'component_type': {
-            \   'buffers': 'tabsel'
             \ },
             \ 'active': {
             \   'left':  [ [ 'mode'], ['readonly', 'relativepath', 'modified'], ['cocstatus']],
@@ -230,60 +239,23 @@ set number relativenumber
 set termguicolors
 set diffopt+=iwhite " No whitespace in vimdiff
 
-" nnoremap <silent> j jzz
-" nnoremap <silent> k kzz
-" nnoremap <silent> n nzz
-" nnoremap <silent> N Nzz
-
-let g:fzf_buffers_jump = 1
-let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
-" let g:fzf_preview_window = 'down:50%'
-" let g:fzf_preview_window = 'right:70%:hidden' 
-
-" nnoremap <silent> <Esc> :nohlsearch<CR><C-L>
+nnoremap <silent> <Esc> :nohlsearch<CR><C-L>
 
 "create a new buffer (save it with :w ./path/to/FILENAME)
 nnoremap <leader>B :enew<cr>
 
 "wipeout current buffer
 nnoremap <leader>bw :bp <bar> bw! #<cr>
-" nnoremap <leader>q  :q!<CR>
 
-"close all open buffers
-nnoremap <leader>ba :bufdo bd!<cr>
-
-" fzf commands
-" nnoremap <silent> <leader><leader> :Buffers<CR>
-nnoremap <silent> <leader>s :Rg<CR>
-" nnoremap <silent> <leader>hc :History:<CR>
-" nnoremap <silent> <leader>hf :History<CR>
-
-" for ycm commands
-" nnoremap <leader>jt :YcmCompleter GoTo<CR>
-" nnoremap <leader>jd :YcmCompleter GoToDefinition<CR>
-" nnoremap <leader>jo :YcmCompleter GoToDeclaration<CR>
-" nnoremap <leader>gt :YcmCompleter GetType<CR>
-
-" let g:ycm_min_num_of_chars_for_completion = 88
-" let g:ycm_autoclose_preview_window_after_completion = 1
-" let g:ycm_key_list_stop_completion = ['<C-c>']
-" let g:ycm_key_list_select_completion = ['<TAB>']
-" let g:ycm_server_python_interpreter = '/usr/bin/python'
-" let g:ycm_python_binary_path = 'python'
-" Disables automatic commenting on newline:
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " " Enable paste in insert mode
 cnoremap <C-R> <C-R>+
 inoremap <C-R> <C-G>u<C-R>+
-
+nnoremap <silent> <leader>dt :windo diffthis<CR>
+nnoremap <silent> <leader>do :windo diffoff<CR>
 let g:python3_host_prog = "/bin/python"
 
-"Move lines up and down"
-nnoremap <C-Up> :m-2<cr>==
-nnoremap <C-Down> :m+<cr>==
-xnoremap <C-Up> :m-2<cr>gv=gv
-xnoremap <C-Up> :m'>+<cr>gv=gv
 
 " map <C-h> <C-w>h
 " map <C-j> <C-w>j
@@ -293,23 +265,9 @@ xnoremap <C-Up> :m'>+<cr>gv=gv
 " paste with newline in normal mode
 nmap <leader>p o<esc>p
 
-" Netrw
-let g:netrw_banner = 0
-let g:netrw_liststyle = 3
-let g:netrw_browse_split = 2
-let g:netrw_winsize = 25
-" augroup ProjectDrawer
-"   autocmd!
-"   autocmd VimEnter * :Vexplore
-" augroup END
-
 "persist in v-mode after >> <<"
 vmap < <gv
 vmap > >gv
-
-
-"update index"
-"nnoremap <leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
 
 set hidden
 set undofile
@@ -336,9 +294,7 @@ function! s:check_back_space() abort
     return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-"     \ <SID>check_back_space() ? "\<TAB>" :
-nmap <leader>ac  <Plug>(coc-codeaction)
+nmap <leader>ac  <Plug>(coc-codeaction-selected)
 
 inoremap <silent><expr> <c-space> coc#refresh()
 
@@ -350,17 +306,6 @@ inoremap <silent><expr><S-Tab>
 
 imap <C-j> <Plug>(coc-snippets-expand-jump)
 imap <C-k> <Plug>(coc-snippets-expand)
-
-" inoremap <silent><expr> <cr> coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" : "\<CR>"
-" inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-
-" inoremap <silent><expr> <CR>
-"       \ pumvisible() ? coc#_select_confirm() :
-"       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-"       \ "\<CR>"
-
-" \ <SID>check_back_space() ? "\<CR>" :
-" \ coc#refresh()
 
 imap <C-c> <C-e>
 " GoTo code navigation.
@@ -393,16 +338,12 @@ omap af <Plug>(coc-funcobj-a)
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
 
-" Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-
 " " Apply AutoFix to problem on the current line.
 " nmap <leader>qf  <Plug>(coc-fix-current)
 
 " Find symbol of current document.
-nnoremap <silent><nowait> <leader>out  :<C-u>CocList outline<cr>
-nnoremap <silent><nowait> <leader>re  :<C-u>CocListResume<cr>
+" nnoremap <silent><nowait> <leader>out  :<C-u>CocList outline<cr>
+" nnoremap <silent><nowait> <leader>re  :<C-u>CocListResume<cr>
 
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')

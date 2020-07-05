@@ -3,5 +3,6 @@
     "python.autoUpdateLanguageServer": false,
     "rust-analyzer.serverPath": "~/dots/coc/extensions/coc-rust-analyzer-data/rust-analyzer",
     "yank.enableCompletion": false,
-    "yank.list.maxsize": 10
+    "yank.list.maxsize": 10,
+    "coc.preferences.useQuickfixForLocations": false
 }

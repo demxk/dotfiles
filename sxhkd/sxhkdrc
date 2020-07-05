@@ -1,47 +1,50 @@
 #
 # wm independent hotkeys
 #
-
 # terminal emulator
 super + Return
     kitty
 
+super + t
+    kitty_floating
+    
 # program launcher
 super + d
-	rofi -show run
+    rofi -modi drun -show drun -show-icons
 
 # make sxhkd reload its configuration files:
 super + Escape
 	pkill -USR1 -x sxhkd
 
 super + 0
-    ~/dots/sxhkd/scripts/powermenu
-
-
-super + g
-    bspc node -g hidden=on
-
-super + u
-    unhide
+    powermenu
 
 super + n
     bspc desktop -f next.occupied
 
+super + u
+    unhide
+
+# rotate tree
 super + r
     bspc node @parent -R 90
+
+super + a : {h, j, k ,l}
+    resize {h, j, k ,l}
 
 # balance right part
 super + e
     bspc node @/2 -B
 
+
+# mark focused node
+super + g
+    rofi -sep "|" -dmenu -i -p 'Mark'  -width 15 -hide-scrollbar -line-padding 4 -padding 20 -lines 4 <<< "> sticky|> private|> hidden|> marked" | cut -d' ' -f2 |  xargs bspc node -g
+
 super + s
     bspc node -n @/2
 
-super + m
-    bspc node -n @/1
 
-super + {-, +}
-    bspc node -z 
 
 # F keys
 XF86AudioRaiseVolume   
@@ -71,16 +74,12 @@ super + shift + {Escape, r}
 # close and kill
 super + q
     bspc node -c
-	# kill_window
 
 # alternate between the tiled and monocle layout
 super + f
     bspc desktop -l next
 
-# super + t
-#     bsp-layout set tall
-
-super + {p,b,comma,period}
+super + {p,b,bracketleft,bracketright}
 	bspc node -f @{parent,brother,first,second}
 
 # super + m
@@ -105,6 +104,9 @@ super + {p,b,comma,period}
 # focus the next/previous node in the current desktop
 super + {_, shift + } {j, k}
     bspc node -{f,s} {next,prev}.local.!floating
+
+# super + {_, shift + } {h, l}
+#     bspc node -{f,s} {west,east}.local.!floating
 
 # move node to master
 # need to change based to where master is
@@ -144,8 +146,8 @@ super + {1-9}
 #
 
 # preselect the direction
-super + ctrl + {h,j,k,l}
-	bspc node -f {west,south,north,east}
+# super + {_, Shift + } {h,j,k,l}
+# 	bspc node -{f, s} {west,south,north,east}
 
 # preselect the ratio
 super + ctrl + {1-9}
@@ -165,13 +167,13 @@ super + ctrl + shift + space
 
 # expand a window by moving one of its side outwrd
 
-super + {h,l}
-    resize {-20, 20}
+super + {equal, minus}
+    master_resize {plus,minus}
 
 # contrct  window by moving one of its side inward
-super + alt + {h,j,k,l}
+super + ctrl : {h,j,k,l}
 	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
 
 # move a floating window
-super + {Left,Down,Up,Right}
-	bspc node -v {-20 0,0 20,0 -20,20 0}
+super + alt : {h, j, k, l}
+	bspc node -v {-25 0, 0 25, 0 -25, 25 0}
