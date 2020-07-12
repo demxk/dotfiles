@@ -2,14 +2,16 @@ call plug#begin('~/.local/share/nvim/plugged')
 " Plug 'Shougo/deoplete.nvim'
 " Plug 'deoplete-plugins/deoplete-jedi', { 'for': 'python' }
 " Plug 'davidhalter/jedi-vim'
-
+Plug 'dag/vim-fish'
+" Plug 'rust-lang/rust.vim'
 " Autocomplete, LSP, Linting
-" Plug 'dense-analysis/ale'
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'dense-analysis/ale'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Colors
 Plug 'rakr/vim-one'
 Plug 'itchyny/lightline.vim'
+" Plug 'neovim/nvim-lsp'
 
 " different usefull plugins
 Plug 'mhinz/vim-startify'
@@ -19,8 +21,8 @@ Plug 'machakann/vim-sandwich'
 Plug 'justinmk/vim-sneak'
 Plug 'wellle/targets.vim'
 
-" " git
-" Plug 'tpope/vim-fugitive'
+" git
+Plug 'tpope/vim-fugitive'
 " Plug 'junegunn/gv.vim'
 
 " Plug 'lambdalisue/gina.vim/'
@@ -37,7 +39,15 @@ let g:netrw_fastbrowse = 0
 let g:floaterm_autoclose = 2
 let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 0
+
 vmap y ygv<Esc>
+
+" Map Ctrl + Shift + j/k to move lines down/up
+nnoremap    ^]j     :m+<cr>==
+nnoremap    ^]k     :m-2<cr>==
+vnoremap    ^]j     :m '>+1<CR>gv=gv
+vnoremap    ^]k     :m '<-2<CR>gv=gv
+
 nnoremap    <C-t>       :FloatermToggle<CR>
 nnoremap    <leader>tn  :FloatermNew<CR>
 tnoremap    <Esc>       <C-\><C-n>
@@ -137,11 +147,11 @@ nnoremap <M-k> :m-2<cr>==
 xnoremap <M-j> :m'>+<cr>gv=gv
 xnoremap <M-k> :m-2<cr>gv=gv
 
-" window resize with Alt + arrows
-nnoremap <M-Up>     :res +3<CR>
-nnoremap <M-Down>   :res -3<CR>
-nnoremap <M-Left>   :vertical res -3<CR>
-nnoremap <M-Right>  :vertical res +3<CR>
+" " window resize with Alt + arrows
+" nnoremap <M-Up>     :res +3<CR>
+" nnoremap <M-Down>   :res -3<CR>
+" nnoremap <M-Left>   :vertical res -3<CR>
+" nnoremap <M-Right>  :vertical res +3<CR>
 
 
 set timeoutlen=1000
@@ -162,7 +172,7 @@ augroup CursorLineOnlyInActiveWindow
 augroup END
 
 
-nmap ``         <c-^>
+nmap ``         <C-w><C-w>
 
 " replace f/F/t/T with sneakF
 nmap f <Plug>Sneak_s

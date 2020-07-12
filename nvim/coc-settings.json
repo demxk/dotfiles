@@ -4,5 +4,7 @@
     "rust-analyzer.serverPath": "~/dots/coc/extensions/coc-rust-analyzer-data/rust-analyzer",
     "yank.enableCompletion": false,
     "yank.list.maxsize": 10,
-    "coc.preferences.useQuickfixForLocations": false
+    "coc.preferences.useQuickfixForLocations": false,
+    "coc.preferences.jumpCommand": "vsp",
+    "coc.preferences.formatOnSaveFiletypes": ["rs"]
 }

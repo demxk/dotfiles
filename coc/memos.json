@@ -29,7 +29,7 @@
         "sysPrefix": "/usr",
         "fileHash": "4c2c938b762d0cb5d59308666a2115e188af91c19f066c7553a9c8040b81e87db43c97d9ef013c533acae906c08baa9fb8b92acd0480db693cc93e36733e8c22"
       },
-      "expiry": 1593674194338
+      "expiry": 1594333680321
     },
     "/usr/sbin/python3.7.v3": {
       "data": {
@@ -79,7 +79,7 @@
         "sysPrefix": "/usr",
         "fileHash": "007005b3312ca6d63beaddbfc2e938f9e7ae32dac20feddbbe36a732773f754065774ff6c0d8ef50a48e897f9822467bd8d4bdb898e46602c6a656c2f2169801"
       },
-      "expiry": 1593674194301
+      "expiry": 1594333680277
     },
     "/usr/sbin/python2.7.v3": {
       "data": {
@@ -154,7 +154,7 @@
         "sysPrefix": "/usr",
         "fileHash": "4c2c938b762d0cb5d59308666a2115e188af91c19f066c7553a9c8040b81e87db43c97d9ef013c533acae906c08baa9fb8b92acd0480db693cc93e36733e8c22"
       },
-      "expiry": 1593674194303
+      "expiry": 1594333680278
     },
     "/bin/python3.7.v3": {
       "data": {
@@ -204,7 +204,7 @@
         "sysPrefix": "/usr",
         "fileHash": "007005b3312ca6d63beaddbfc2e938f9e7ae32dac20feddbbe36a732773f754065774ff6c0d8ef50a48e897f9822467bd8d4bdb898e46602c6a656c2f2169801"
       },
-      "expiry": 1593674194309
+      "expiry": 1594333680285
     },
     "/bin/python2.7.v3": {
       "data": {
@@ -279,7 +279,7 @@
         "sysPrefix": "/usr",
         "fileHash": "4c2c938b762d0cb5d59308666a2115e188af91c19f066c7553a9c8040b81e87db43c97d9ef013c533acae906c08baa9fb8b92acd0480db693cc93e36733e8c22"
       },
-      "expiry": 1593674194311
+      "expiry": 1594333680286
     },
     "/usr/bin/python3.7.v3": {
       "data": {
@@ -329,7 +329,7 @@
         "sysPrefix": "/usr",
         "fileHash": "007005b3312ca6d63beaddbfc2e938f9e7ae32dac20feddbbe36a732773f754065774ff6c0d8ef50a48e897f9822467bd8d4bdb898e46602c6a656c2f2169801"
       },
-      "expiry": 1593674194307
+      "expiry": 1594333680281
     },
     "/usr/bin/python2.v3": {
       "data": {
@@ -429,7 +429,7 @@
         "sysPrefix": "/usr",
         "fileHash": "4c2c938b762d0cb5d59308666a2115e188af91c19f066c7553a9c8040b81e87db43c97d9ef013c533acae906c08baa9fb8b92acd0480db693cc93e36733e8c22"
       },
-      "expiry": 1593674194305
+      "expiry": 1594333680282
     },
     "/home/demxk/builds/miniconda3/bin/python3.v3": {
       "data": {
@@ -855,7 +855,7 @@
         "sysPrefix": "/usr",
         "fileHash": "007005b3312ca6d63beaddbfc2e938f9e7ae32dac20feddbbe36a732773f754065774ff6c0d8ef50a48e897f9822467bd8d4bdb898e46602c6a656c2f2169801"
       },
-      "expiry": 1593674194337
+      "expiry": 1594333680320
     },
     "INTERPRETERS_CACHE_v3_KnownPathsService": [
       {
@@ -1510,14 +1510,14 @@
           "displayName": "Python 3.8.3 64-bit"
         }
       },
-      "expiry": 1593674288795
+      "expiry": 1594333680451
     },
     "/usr/bin/python.interpreter.displayName.v7": {
       "data": {
         "displayName": "Python 3.8.3 64-bit",
         "hash": "4c2c938b762d0cb5d59308666a2115e188af91c19f066c7553a9c8040b81e87db43c97d9ef013c533acae906c08baa9fb8b92acd0480db693cc93e36733e8c22-56ab0df9a29e5ebda5cb8dacf5f47c92"
       },
-      "expiry": 1593674288775
+      "expiry": 1594333680418
     },
     "CONDA_ENVIRONMENTS": {
       "data": [
@@ -1577,7 +1577,7 @@
         "displayName": "Python 3.8.3 64-bit",
         "hash": "4c2c938b762d0cb5d59308666a2115e188af91c19f066c7553a9c8040b81e87db43c97d9ef013c533acae906c08baa9fb8b92acd0480db693cc93e36733e8c22-feefdc68012160fd5198d87ee3d161ae"
       },
-      "expiry": 1593674194356
+      "expiry": 1594333680416
     },
     "/bin/python2.interpreter.displayName.v7": {
       "data": {
@@ -1591,7 +1591,7 @@
         "displayName": "Python 3.8.3 64-bit",
         "hash": "4c2c938b762d0cb5d59308666a2115e188af91c19f066c7553a9c8040b81e87db43c97d9ef013c533acae906c08baa9fb8b92acd0480db693cc93e36733e8c22-976fcc4ca00884825f1bc77112d17374"
       },
-      "expiry": 1593674288777
+      "expiry": 1594333680421
     },
     "/usr/sbin/python2.interpreter.displayName.v7": {
       "data": {
@@ -1605,7 +1605,7 @@
         "displayName": "Python 3.8.3 64-bit",
         "hash": "4c2c938b762d0cb5d59308666a2115e188af91c19f066c7553a9c8040b81e87db43c97d9ef013c533acae906c08baa9fb8b92acd0480db693cc93e36733e8c22-7cbc6ec69373463aad6e35bedc6a3bfc"
       },
-      "expiry": 1593674288779
+      "expiry": 1594333680423
     },
     "/sbin/python2.interpreter.displayName.v7": {
       "data": {
@@ -1828,7 +1828,7 @@
           "displayName": "Python 3.8.3 64-bit"
         }
       },
-      "expiry": 1593674288791
+      "expiry": 1594333680447
     },
     "/bin/python2.interpreter.Details.v7": {
       "data": {
@@ -1888,7 +1888,7 @@
           "displayName": "Python 3.8.3 64-bit"
         }
       },
-      "expiry": 1593674288800
+      "expiry": 1594333680456
     },
     "/usr/sbin/python2.interpreter.Details.v7": {
       "data": {
@@ -1948,7 +1948,7 @@
           "displayName": "Python 3.8.3 64-bit"
         }
       },
-      "expiry": 1593674288804
+      "expiry": 1594333680460
     },
     "/sbin/python2.interpreter.Details.v7": {
       "data": {
@@ -2030,7 +2030,7 @@
         "sysPrefix": "/usr",
         "fileHash": "007005b3312ca6d63beaddbfc2e938f9e7ae32dac20feddbbe36a732773f754065774ff6c0d8ef50a48e897f9822467bd8d4bdb898e46602c6a656c2f2169801"
       },
-      "expiry": 1593674194300
+      "expiry": 1594333680275
     },
     "/bin/python3.8.v3": {
       "data": {
@@ -2055,7 +2055,7 @@
         "sysPrefix": "/usr",
         "fileHash": "007005b3312ca6d63beaddbfc2e938f9e7ae32dac20feddbbe36a732773f754065774ff6c0d8ef50a48e897f9822467bd8d4bdb898e46602c6a656c2f2169801"
       },
-      "expiry": 1593674194308
+      "expiry": 1594333680283
     },
     "/usr/bin/python3.8.v3": {
       "data": {
@@ -2080,7 +2080,7 @@
         "sysPrefix": "/usr",
         "fileHash": "007005b3312ca6d63beaddbfc2e938f9e7ae32dac20feddbbe36a732773f754065774ff6c0d8ef50a48e897f9822467bd8d4bdb898e46602c6a656c2f2169801"
       },
-      "expiry": 1593674194304
+      "expiry": 1594333680279
     },
     "/sbin/python3.8.v3": {
       "data": {
@@ -2105,7 +2105,7 @@
         "sysPrefix": "/usr",
         "fileHash": "007005b3312ca6d63beaddbfc2e938f9e7ae32dac20feddbbe36a732773f754065774ff6c0d8ef50a48e897f9822467bd8d4bdb898e46602c6a656c2f2169801"
       },
-      "expiry": 1593674194336
+      "expiry": 1594333680318
     },
     "InterpreterAutoSeletionRule-currentPath": {
       "architecture": 3,
@@ -2128,8 +2128,7 @@
       },
       "sysPrefix": "/usr",
       "fileHash": "4c2c938b762d0cb5d59308666a2115e188af91c19f066c7553a9c8040b81e87db43c97d9ef013c533acae906c08baa9fb8b92acd0480db693cc93e36733e8c22",
-      "type": "Unknown",
-      "cachedEntry": true
+      "type": "Unknown"
     },
     "preferredGlobalPyInterpreter": {
       "architecture": 3,
@@ -2177,7 +2176,6 @@
       "sysPrefix": "/usr",
       "fileHash": "4c2c938b762d0cb5d59308666a2115e188af91c19f066c7553a9c8040b81e87db43c97d9ef013c533acae906c08baa9fb8b92acd0480db693cc93e36733e8c22",
       "type": "Unknown",
-      "cachedEntry": true,
       "displayName": "Python 3.8.3 64-bit"
     },
     "InterpreterAutoSeletionRule-cachedInterpreters": {
@@ -2204,6 +2202,107 @@
       "type": "Unknown",
       "cachedEntry": true,
       "displayName": "Python 3.8.3 64-bit"
+    },
+    "/home/demxk/projects/python/pytorch-examples/bin/python3.v3": {
+      "data": {
+        "architecture": 3,
+        "path": "/home/demxk/projects/python/pytorch-examples/bin/python3",
+        "version": {
+          "options": {
+            "loose": false,
+            "includePrerelease": false
+          },
+          "loose": false,
+          "raw": "3.8.3-final",
+          "major": 3,
+          "minor": 8,
+          "patch": 3,
+          "prerelease": [
+            "final"
+          ],
+          "build": [],
+          "version": "3.8.3-final"
+        },
+        "sysPrefix": "/home/demxk/projects/python/pytorch-examples",
+        "fileHash": "b23e42eeaeb6a7d607afde50e4768aacc039f1bec9138458651353daba7129f04094914c05c8f4a2da629c68794881ddfc5d0888990b7b679378b41d73ab1ce6"
+      },
+      "expiry": 1594333680303
+    },
+    "/home/demxk/projects/python/pytorch-examples/bin/python.v3": {
+      "data": {
+        "architecture": 3,
+        "path": "/home/demxk/projects/python/pytorch-examples/bin/python",
+        "version": {
+          "options": {
+            "loose": false,
+            "includePrerelease": false
+          },
+          "loose": false,
+          "raw": "3.8.3-final",
+          "major": 3,
+          "minor": 8,
+          "patch": 3,
+          "prerelease": [
+            "final"
+          ],
+          "build": [],
+          "version": "3.8.3-final"
+        },
+        "sysPrefix": "/home/demxk/projects/python/pytorch-examples",
+        "fileHash": "b23e42eeaeb6a7d607afde50e4768aacc039f1bec9138458651353daba7129f04094914c05c8f4a2da629c68794881ddfc5d0888990b7b679378b41d73ab1ce6"
+      },
+      "expiry": 1594333680305
+    },
+    "/home/demxk/projects/python/pytorch-examples/bin/python.interpreter.displayName.v7": {
+      "data": {
+        "displayName": "Python 3.8.3 64-bit ('pytorch-examples': venv)",
+        "hash": "b23e42eeaeb6a7d607afde50e4768aacc039f1bec9138458651353daba7129f04094914c05c8f4a2da629c68794881ddfc5d0888990b7b679378b41d73ab1ce6-b6dafe815848d01f1b9d1fd060e67590"
+      },
+      "expiry": 1594333680326
+    },
+    "/home/demxk/projects/python/pytorch-examples/bin/python.interpreter.Details.v7": {
+      "data": {
+        "fileHash": "b23e42eeaeb6a7d607afde50e4768aacc039f1bec9138458651353daba7129f04094914c05c8f4a2da629c68794881ddfc5d0888990b7b679378b41d73ab1ce6",
+        "info": {
+          "architecture": 3,
+          "path": "/home/demxk/projects/python/pytorch-examples/bin/python",
+          "version": {
+            "options": {
+              "loose": false,
+              "includePrerelease": false
+            },
+            "loose": false,
+            "raw": "3.8.3-final",
+            "major": 3,
+            "minor": 8,
+            "patch": 3,
+            "prerelease": [
+              "final"
+            ],
+            "build": [],
+            "version": "3.8.3-final"
+          },
+          "sysPrefix": "/home/demxk/projects/python/pytorch-examples",
+          "fileHash": "b23e42eeaeb6a7d607afde50e4768aacc039f1bec9138458651353daba7129f04094914c05c8f4a2da629c68794881ddfc5d0888990b7b679378b41d73ab1ce6",
+          "envName": "pytorch-examples",
+          "type": "Venv",
+          "displayName": "Python 3.8.3 64-bit ('pytorch-examples': venv)"
+        }
+      },
+      "expiry": 1594333680335
+    },
+    "/home/demxk/projects/python/pytorch-examples/bin/python3.interpreter.Details.v7": {
+      "data": {
+        "fileHash": "b23e42eeaeb6a7d607afde50e4768aacc039f1bec9138458651353daba7129f04094914c05c8f4a2da629c68794881ddfc5d0888990b7b679378b41d73ab1ce6"
+      },
+      "expiry": 1594333680427
+    },
+    "/home/demxk/projects/python/pytorch-examples/bin/python3.interpreter.displayName.v7": {
+      "data": {
+        "displayName": "Python 3.8.3 64-bit ('pytorch-examples': venv)",
+        "hash": "b23e42eeaeb6a7d607afde50e4768aacc039f1bec9138458651353daba7129f04094914c05c8f4a2da629c68794881ddfc5d0888990b7b679378b41d73ab1ce6-d29aedb5faa65c4e29bc61690ba57565"
+      },
+      "expiry": 1594333680477
     }
   },
   "coc-rust-analyzer|global": {
@@ -2364,5 +2463,140 @@
     },
     "INTERPRETERS_CACHE_v3_PipEnvService": [],
     "INTERPRETERS_CACHE_v3_WorkspaceVirtualEnvService": []
+  },
+  "coc-python|/home/demxk/projects/python": {
+    "INTERPRETERS_CACHE_v3_PipEnvService:429a89f3c6039c90318e00862ec9daa9": [],
+    "INTERPRETERS_CACHE_v3_WorkspaceVirtualEnvService:429a89f3c6039c90318e00862ec9daa9": [
+      {
+        "architecture": 3,
+        "path": "/home/demxk/projects/python/pytorch-examples/bin/python",
+        "version": {
+          "options": {
+            "loose": false,
+            "includePrerelease": false
+          },
+          "loose": false,
+          "raw": "3.8.3-final",
+          "major": 3,
+          "minor": 8,
+          "patch": 3,
+          "prerelease": [
+            "final"
+          ],
+          "build": [],
+          "version": "3.8.3-final"
+        },
+        "sysPrefix": "/home/demxk/projects/python/pytorch-examples",
+        "fileHash": "b23e42eeaeb6a7d607afde50e4768aacc039f1bec9138458651353daba7129f04094914c05c8f4a2da629c68794881ddfc5d0888990b7b679378b41d73ab1ce6",
+        "envName": "pytorch-examples",
+        "type": "Venv"
+      },
+      {
+        "architecture": 3,
+        "path": "/home/demxk/projects/python/pytorch-examples/bin/python3",
+        "version": {
+          "options": {
+            "loose": false,
+            "includePrerelease": false
+          },
+          "loose": false,
+          "raw": "3.8.3-final",
+          "major": 3,
+          "minor": 8,
+          "patch": 3,
+          "prerelease": [
+            "final"
+          ],
+          "build": [],
+          "version": "3.8.3-final"
+        },
+        "sysPrefix": "/home/demxk/projects/python/pytorch-examples",
+        "fileHash": "b23e42eeaeb6a7d607afde50e4768aacc039f1bec9138458651353daba7129f04094914c05c8f4a2da629c68794881ddfc5d0888990b7b679378b41d73ab1ce6",
+        "envName": "pytorch-examples",
+        "type": "Venv"
+      }
+    ],
+    "SelectedPythonPath": "/home/demxk/projects/python/pytorch-examples/bin/python3",
+    "autoSelectedWorkspacePythonInterpreter-/home/demxk/projects/python": {
+      "architecture": 3,
+      "path": "/home/demxk/projects/python/pytorch-examples/bin/python3",
+      "version": {
+        "options": {
+          "loose": false,
+          "includePrerelease": false
+        },
+        "loose": false,
+        "raw": "3.8.3-final",
+        "major": 3,
+        "minor": 8,
+        "patch": 3,
+        "prerelease": [
+          "final"
+        ],
+        "build": [],
+        "version": "3.8.3-final"
+      },
+      "sysPrefix": "/home/demxk/projects/python/pytorch-examples",
+      "fileHash": "b23e42eeaeb6a7d607afde50e4768aacc039f1bec9138458651353daba7129f04094914c05c8f4a2da629c68794881ddfc5d0888990b7b679378b41d73ab1ce6",
+      "envName": "pytorch-examples",
+      "type": "Venv"
+    },
+    "INTERPRETERS_CACHE_v3_PipEnvService": [],
+    "INTERPRETERS_CACHE_v3_WorkspaceVirtualEnvService": [
+      {
+        "architecture": 3,
+        "path": "/home/demxk/projects/python/pytorch-examples/bin/python",
+        "version": {
+          "options": {
+            "loose": false,
+            "includePrerelease": false
+          },
+          "loose": false,
+          "raw": "3.8.3-final",
+          "major": 3,
+          "minor": 8,
+          "patch": 3,
+          "prerelease": [
+            "final"
+          ],
+          "build": [],
+          "version": "3.8.3-final"
+        },
+        "sysPrefix": "/home/demxk/projects/python/pytorch-examples",
+        "fileHash": "b23e42eeaeb6a7d607afde50e4768aacc039f1bec9138458651353daba7129f04094914c05c8f4a2da629c68794881ddfc5d0888990b7b679378b41d73ab1ce6",
+        "envName": "pytorch-examples",
+        "type": "Venv"
+      },
+      {
+        "architecture": 3,
+        "path": "/home/demxk/projects/python/pytorch-examples/bin/python3",
+        "version": {
+          "options": {
+            "loose": false,
+            "includePrerelease": false
+          },
+          "loose": false,
+          "raw": "3.8.3-final",
+          "major": 3,
+          "minor": 8,
+          "patch": 3,
+          "prerelease": [
+            "final"
+          ],
+          "build": [],
+          "version": "3.8.3-final"
+        },
+        "sysPrefix": "/home/demxk/projects/python/pytorch-examples",
+        "fileHash": "b23e42eeaeb6a7d607afde50e4768aacc039f1bec9138458651353daba7129f04094914c05c8f4a2da629c68794881ddfc5d0888990b7b679378b41d73ab1ce6",
+        "envName": "pytorch-examples",
+        "type": "Venv"
+      }
+    ]
+  },
+  "coc-python|/home/demxk/dots": {
+    "INTERPRETERS_CACHE_v3_WorkspaceVirtualEnvService": [],
+    "INTERPRETERS_CACHE_v3_PipEnvService": [],
+    "INTERPRETERS_CACHE_v3_PipEnvService:c8a88ec2839845334bfdb9835b856bdd": [],
+    "INTERPRETERS_CACHE_v3_WorkspaceVirtualEnvService:c8a88ec2839845334bfdb9835b856bdd": []
   }
 }
