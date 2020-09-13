@@ -34,7 +34,7 @@ window:
   # Blank space added around the window in pixels. This padding is scaled
   # by DPI and the specified value is always added at both opposing sides.
   padding:
-    x: 2
+    x: 0
     y: 2
 
   # Spread additional padding evenly around the terminal content.
@@ -68,8 +68,10 @@ scrolling:
 # Font configuration
 font:
   normal:
+    # family: Iosevka
     family: JetBrainsMono Nerd Font Mono
     style: Regular
+  size: 8
   #bold:
     #family: JetBrains Mono
     #style:
@@ -97,13 +99,12 @@ font:
     #style: Bold Italic
 
   # Point size
-  size: 8.5
     # canon
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
   offset:
     x: 0
-    y: 2
+    y: 1
 
   # Glyph offset determines the locations of the glyphs within their cells with
   # the default being at the bottom. Increasing `x` moves the glyph to the right,
@@ -121,6 +122,7 @@ colors:
   primary:
     background: '#2E3440'
     foreground: '#dbd4c1'
+    # foreground: '#111111'
 
     # Bright and dim foreground colors
     #
@@ -211,10 +213,10 @@ colors:
 #   - Linear
 #
 # Specifying a `duration` of `0` will disable the visual bell.
-visual_bell:
-  animation: EaseOutExpo
-  duration: 0
-  color: '#ffffff'
+# visual_bell:
+#   animation: EaseOutExpo
+#   duration: 0
+#   color: '#ffffff'
 
 # Background opacity
 #
@@ -229,7 +231,7 @@ selection:
   save_to_clipboard: true
 
 # Allow terminal applications to change Alacritty's window title.
-dynamic_title: true
+# dynamic_title: true
 
 cursor:
   style: Underline
@@ -428,10 +430,11 @@ mouse:
 # at once.
 key_bindings:
   # (Windows, Linux, and BSD only)
-    
+  # - { key: J,        mods: Control|Shift,       chars: "^]j"            }
   - { key: J,        mods: Control|Shift,       chars: "^]j"            }
   - { key: K,        mods: Control|Shift,       chars: "^]k"            }
-  - { key: P,        mods: Control,       action: Paste            }
+  - { key: P,        mods: Control,             action: Paste            }
+  - { key: V,        mods: Alt,                 action: Paste            }
   - { key: Insert,   mods: Shift,         action: Paste            }
   - { key: Slash,    mods: Control,       chars: "gc"              }
   # - { key: Y,        mods: Control,       action: Copy             }
@@ -440,6 +443,10 @@ key_bindings:
   - { key: Add,      mods: Control,       action: IncreaseFontSize }
   - { key: Subtract, mods: Control,       action: DecreaseFontSize }
   - { key: Minus,    mods: Control,       action: DecreaseFontSize }
+  # - { key: J,    mods: Super,       action: ScrollLineDown }
+  # - { key: K,    mods: Super,       action: ScrollLineUp }
+
+  # - { key: Back,    mods: Control,       action: ToggleFullscreen }
 
 debug:
   # Display the time it takes to redraw each frame.

@@ -1,6 +1,7 @@
 [bar/my_bar]
 bottom = false
 font-0 = "JetBrainsMono Nerd Font Mono:style=Regular:size=14,0"
+/* font-0 = "Fira Code:style=Regular:size=14,0" */
 fixed-center = false
 
 width = 100%

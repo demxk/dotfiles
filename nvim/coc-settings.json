@@ -1,10 +1,17 @@
 {
     "python.linting.enabled": false,
     "python.autoUpdateLanguageServer": false,
-    "rust-analyzer.serverPath": "~/dots/coc/extensions/coc-rust-analyzer-data/rust-analyzer",
+    "rust-analyzer.serverPath": "~/.local/bin/rust-analyzer",
     "yank.enableCompletion": false,
     "yank.list.maxsize": 10,
     "coc.preferences.useQuickfixForLocations": false,
     "coc.preferences.jumpCommand": "vsp",
-    "coc.preferences.formatOnSaveFiletypes": ["rs"]
+    "coc.preferences.formatOnSaveFiletypes": ["rs"],
+    "diagnostic.checkCurrentLine": true,
+    "languageserver": {
+        "kotlin": {
+            "command": "~/builds/kotlin_lsp/server/bin/kotlin-language-server",
+            "filetypes": ["kotlin"]
+        }
+    }
 }

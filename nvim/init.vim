@@ -1,9 +1,11 @@
-call plug#begin('~/.local/share/nvim/plugged')
-" Plug 'Shougo/deoplete.nvim'
+let g:coc_disable_startup_warning = 1
+call plug#begin('~/.local/share/nvim/plugged') " Plug 'Shougo/deoplete.nvim'
 " Plug 'deoplete-plugins/deoplete-jedi', { 'for': 'python' }
 " Plug 'davidhalter/jedi-vim'
-Plug 'dag/vim-fish'
-" Plug 'rust-lang/rust.vim'
+
+Plug 'rust-lang/rust.vim'
+Plug 'udalov/kotlin-vim'
+
 " Autocomplete, LSP, Linting
 Plug 'dense-analysis/ale'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -30,18 +32,34 @@ Plug 'tpope/vim-fugitive'
 " fuzzy search
 Plug 'airblade/vim-rooter'
 Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
-
 Plug 'voldikss/vim-floaterm'
-
 call plug#end()
 
+imap <C-BS> <C-W>
 let g:netrw_fastbrowse = 0
 let g:floaterm_autoclose = 2
 let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 0
 
+hi ActiveWindow guibg=#282c34
+hi InactiveWindow guibg=#2E3440
+
+function! Handle_Win_Enter()
+  setlocal winhighlight=Normal:ActiveWindow,NormalNC:InactiveWindow
+endfunction
+
+nnoremap <leader>cd :cd %:p:h<CR>
+
+augroup WindowManagement
+  autocmd!  
+  autocmd WinEnter * call Handle_Win_Enter()
+augroup END
+
+
 vmap y ygv<Esc>
 
+nmap        <M-p>   o<ESC>p
+nmap        <M-S-p>   O<ESC>p
 " Map Ctrl + Shift + j/k to move lines down/up
 nnoremap    ^]j     :m+<cr>==
 nnoremap    ^]k     :m-2<cr>==
@@ -61,8 +79,8 @@ function! GoToNextIndent(inc)
 
     " Look for a line with the same indent level whithout going out of the buffer
     while !matchIndent && currentLine != line('$') + 1 && currentLine != -1
-        let currentLine += a:inc
         let matchIndent = indent(currentLine) == indent('.')
+        let currentLine += a:inc
     endwhile
 
     " If a line is found go to this line
@@ -76,14 +94,21 @@ inoremap <C-j> <Down>
 inoremap <C-k> <Up>
 inoremap <C-h> <C-o>b
 inoremap <C-l> <C-o>w
-nnoremap <C-j> :call GoToNextIndent(1)<CR>
-nnoremap <C-k> :call GoToNextIndent(-1)<CR>
+nmap <C-j> <C-d>
+nmap <C-k> <C-u>
+vmap <C-j> <C-d>
+vmap <C-k> <C-u>
 nnoremap <C-h> ^
 nnoremap <C-l> $
+
+" vim-rooter config
+let g:rooter_patterns = ['=src', 'Cargo.toml']
+
 " ____________________________________________________
 " CLAP CONFIG
 let g:clap_layout = { 'relative': 'editor' }
 let g:clap_insert_mode_only = v:true
+let g:clap_disable_run_rooter = v:true
 let g:clap_theme = { 
 \ 'clap_default_current_selection': { 'ctermfg': 'green' },
 \ 'clap_display': { 'ctermfg': 'white' }
@@ -140,12 +165,11 @@ nnoremap <silent> <leader>rr    :<C-u>source ~/dots/nvim/init.vim<CR>
 " open my nvim config file
 nnoremap <leader>oo :e $MYVIMRC<CR>
 
-
 " Move lines up and down
-nnoremap <M-j> :m+<cr>==
-nnoremap <M-k> :m-2<cr>==
-xnoremap <M-j> :m'>+<cr>gv=gv
-xnoremap <M-k> :m-2<cr>gv=gv
+" nnoremap <M-j> :m+<cr>==
+" nnoremap <M-k> :m-2<cr>==
+" xnoremap <M-j> :m'>+<cr>gv=gv
+" xnoremap <M-k> :m-2<cr>gv=gv
 
 " " window resize with Alt + arrows
 " nnoremap <M-Up>     :res +3<CR>
@@ -261,7 +285,8 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " " Enable paste in insert mode
 cnoremap <C-R> <C-R>+
-inoremap <C-R> <C-G>u<C-R>+
+inoremap <C-R> <C-G>u<C-R><C-o>+
+
 nnoremap <silent> <leader>dt :windo diffthis<CR>
 nnoremap <silent> <leader>do :windo diffoff<CR>
 let g:python3_host_prog = "/bin/python"
@@ -293,6 +318,9 @@ nnoremap C "_C
 vnoremap c "_c
 vnoremap C "_C
 
+nmap <silent> g[ <Plug>(coc-diagnostic-prev)
+nmap <silent> g] <Plug>(coc-diagnostic-next)
+
 " delete to clipboard
 nnoremap <leader>d "+d
 vnoremap <leader>d "+d
@@ -316,6 +344,7 @@ inoremap <silent><expr><S-Tab>
 
 imap <C-j> <Plug>(coc-snippets-expand-jump)
 imap <C-k> <Plug>(coc-snippets-expand)
+" inoremap <C-r> <C-r>*
 
 imap <C-c> <C-e>
 " GoTo code navigation.
