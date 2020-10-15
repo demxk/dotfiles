@@ -19,11 +19,8 @@ super + Escape
 super + 0
     powermenu
 
-super + 8
-    sudo sv restart stubby
-
-super + 9
-    iwctl station wlp2s0 scan && iwctl station wlp2s0 connect jepich
+# super + 9
+#     iwctl station wlp2s0 scan && iwctl station wlp2s0 connect jepich
 
 super + g
     $TERMINAL -e 'nnn'

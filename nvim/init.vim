@@ -1,43 +1,56 @@
-let g:coc_disable_startup_warning = 1
-call plug#begin('~/.local/share/nvim/plugged') " Plug 'Shougo/deoplete.nvim'
-" Plug 'deoplete-plugins/deoplete-jedi', { 'for': 'python' }
-" Plug 'davidhalter/jedi-vim'
+call plug#begin('~/.local/share/nvim/plugged')
 
+Plug 'machakann/vim-highlightedyank'
 Plug 'rust-lang/rust.vim'
-Plug 'udalov/kotlin-vim'
 
 " Autocomplete, LSP, Linting
 Plug 'dense-analysis/ale'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 
 " Colors
 Plug 'rakr/vim-one'
+Plug 'sheerun/vim-polyglot'
 Plug 'itchyny/lightline.vim'
-" Plug 'neovim/nvim-lsp'
+Plug 'embark-theme/vim', { 'as': 'embark' }
 
 " different usefull plugins
-Plug 'mhinz/vim-startify'
+Plug 'unblevable/quick-scope'
+" Plug 'mhinz/vim-startify'
 Plug 'tmsvg/pear-tree'
 Plug 'tpope/vim-commentary'
 Plug 'machakann/vim-sandwich'
-Plug 'justinmk/vim-sneak'
+" Plug 'justinmk/vim-sneak'
 Plug 'wellle/targets.vim'
 
 " git
 Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-rooter'
 " Plug 'junegunn/gv.vim'
 
-" Plug 'lambdalisue/gina.vim/'
-
 " fuzzy search
-Plug 'airblade/vim-rooter'
-Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
+" Plug 'liuchengxu/vim-clap'
+Plug 'junegunn/fzf.vim'
 Plug 'voldikss/vim-floaterm'
 call plug#end()
 
-imap <C-BS> <C-W>
+let g:highlightedyank_highlight_duration = 800
+
+let g:qs_highlight_on_keys = ['f', 'F']
+let g:loaded_python_provider = 0
+let g:python3_host_prog = '~/.pyenv/versions/nvim-python/bin/python'
+
+set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
+
+au TextYankPost * silent! lua vim.highlight.on_yank{timeout=250, on_visual=false, on_macro=true}
+
+let g:fzf_preview_window = 'right:65%'
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
+let $FZF_DEFAULT_OPTS='--reverse'
+
 let g:netrw_fastbrowse = 0
 let g:floaterm_autoclose = 2
+let g:floaterm_width = 0.9
+let g:floaterm_height = 0.8
 let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 0
 
@@ -48,18 +61,17 @@ function! Handle_Win_Enter()
   setlocal winhighlight=Normal:ActiveWindow,NormalNC:InactiveWindow
 endfunction
 
-nnoremap <leader>cd :cd %:p:h<CR>
-
 augroup WindowManagement
   autocmd!  
   autocmd WinEnter * call Handle_Win_Enter()
 augroup END
 
-
+" prevents cursor from jumpinp to start of selection
 vmap y ygv<Esc>
 
-nmap        <M-p>   o<ESC>p
-nmap        <M-S-p>   O<ESC>p
+" nmap        <M-p>   o<ESC>p
+" nmap        <M-S-p>   O<ESC>p
+
 " Map Ctrl + Shift + j/k to move lines down/up
 nnoremap    ^]j     :m+<cr>==
 nnoremap    ^]k     :m-2<cr>==
@@ -68,32 +80,18 @@ vnoremap    ^]k     :m '<-2<CR>gv=gv
 
 nnoremap    <C-t>       :FloatermToggle<CR>
 nnoremap    <leader>tn  :FloatermNew<CR>
+
+nnoremap    <C-g>       :FloatermNew lf<CR>
 tnoremap    <Esc>       <C-\><C-n>
 tnoremap    <C-t>       <C-\><C-n>:FloatermToggle<CR>
 
-function! GoToNextIndent(inc)
-    " Get the cursor current position
-    let currentPos = getpos('.')
-    let currentLine = currentPos[1]
-    let matchIndent = 0
-
-    " Look for a line with the same indent level whithout going out of the buffer
-    while !matchIndent && currentLine != line('$') + 1 && currentLine != -1
-        let matchIndent = indent(currentLine) == indent('.')
-        let currentLine += a:inc
-    endwhile
-
-    " If a line is found go to this line
-    if (matchIndent)
-        let currentPos[1] = currentLine
-        call setpos('.', currentPos)
-    endif
-endfunction
-
-inoremap <C-j> <Down>
-inoremap <C-k> <Up>
+imap <C-j> <Down>
+imap <C-k> <Up>
 inoremap <C-h> <C-o>b
 inoremap <C-l> <C-o>w
+nmap <C-Right> :bnext<CR>
+nmap <C-Left> :bprev<CR>
+
 nmap <C-j> <C-d>
 nmap <C-k> <C-u>
 vmap <C-j> <C-d>
@@ -102,13 +100,13 @@ nnoremap <C-h> ^
 nnoremap <C-l> $
 
 " vim-rooter config
-let g:rooter_patterns = ['=src', 'Cargo.toml']
+let g:rooter_patterns = ['=src', 'Cargo.toml', '*.csproj']
 
 " ____________________________________________________
 " CLAP CONFIG
 let g:clap_layout = { 'relative': 'editor' }
 let g:clap_insert_mode_only = v:true
-let g:clap_disable_run_rooter = v:true
+" let g:clap_disable_run_rooter = v:true
 let g:clap_theme = { 
 \ 'clap_default_current_selection': { 'ctermfg': 'green' },
 \ 'clap_display': { 'ctermfg': 'white' }
@@ -133,6 +131,7 @@ imap <silent><expr> <CR>
     \ coc#expandable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand',''])\<CR>" :
     \ "\<Plug>(PearTreeExpand)"
 
+
 " to write to maybe non-existing folder/file ..
 augroup Mkdir
   autocmd!
@@ -149,17 +148,19 @@ augroup END
 let mapleader=" "
 
 " Fuzzy mapping
-nnoremap <silent> <leader><leader>      :<C-u>Clap buffers<CR>
-nnoremap <silent> <leader>fp            :<C-u>Clap gfiles<CR>
-nnoremap <silent> <leader>fh            :<C-u>Clap history<CR>
-nnoremap <silent> <leader>ff            :<C-u>Clap files<CR>
-nnoremap <silent> <leader>fe            :<C-u>Clap filer<CR>
+" nnoremap <silent> <leader><leader>      :<C-u>Clap buffers<CR>
+" nnoremap <silent> <leader>fp            :<C-u>Clap gfiles<CR>
+" nnoremap <silent> <leader>fh            :<C-u>Clap history<CR>
+" nnoremap <silent> <leader>ff            :<C-u>Clap files<CR>
+" nnoremap <silent> <leader>fe            :<C-u>Clap filer<CR>
 
-" list yank list
-nnoremap <silent> <leader>y             :<C-u>Clap yanks<CR>
+nnoremap <silent> <leader><leader>      :<C-u>Buffers<CR>
+nnoremap <silent> <leader>fg            :<C-u>GFiles<CR>
+nnoremap <silent> <leader>fh            :<C-u>History<CR>
+nnoremap <silent> <leader>ff            :<C-u>Files<CR>
+nnoremap <silent> <leader>rg            :<C-u>Rg<CR>
 
-" source nvim config
-nnoremap <silent> <leader>rr    :<C-u>source ~/dots/nvim/init.vim<CR>
+nnoremap <silent> <leader>rr            :<C-u>source ~/dots/nvim/init.vim<CR>
 
 
 " open my nvim config file
@@ -199,13 +200,14 @@ augroup END
 nmap ``         <C-w><C-w>
 
 " replace f/F/t/T with sneakF
-nmap f <Plug>Sneak_s
-nmap F <Plug>Sneak_S
+" nmap f <Plug>Sneak_s
+" nmap F <Plug>Sneak_S
 
 " ctrl +j/k for command line history
 cnoremap <c-j> <down>
 cnoremap <c-k> <up>
 
+set background=light
 let g:lightline = {
             \ 'component': {
             \   'lineinfo': '%3l,%-2v',
@@ -224,16 +226,18 @@ let g:lightline = {
             \ 'component_function': {
             \   'cocstatus': 'coc#status'
             \ },
-            \ 'colorscheme': 'one',
+            \ 'colorscheme': 'nord',
             \ }
 
-colorscheme one
+let ayucolor="light"  " for light version of theme
+colorscheme embark
 
 function! LightlineFilename()
   return expand('%:t') !=# '' ? @% : '[No Name]'
 endfunction
 
 autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
+
 " add spaces below/above
 nnoremap <silent> gj o<Esc>k
 nnoremap <silent> gk O<Esc>j
@@ -284,13 +288,12 @@ nnoremap <leader>bw :bp <bar> bw! #<cr>
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " " Enable paste in insert mode
-cnoremap <C-R> <C-R>+
-inoremap <C-R> <C-G>u<C-R><C-o>+
+cnoremap <C-R> <C-r><C-o>+
+inoremap <C-R> <C-g>u<C-r><C-o>+
 
 nnoremap <silent> <leader>dt :windo diffthis<CR>
 nnoremap <silent> <leader>do :windo diffoff<CR>
-let g:python3_host_prog = "/bin/python"
-
+let g:python3_host_prog = "/home/demxk/.pyenv/versions/nvim-python/bin/python"
 
 " map <C-h> <C-w>h
 " map <C-j> <C-w>j
@@ -306,6 +309,7 @@ vmap > >gv
 
 set hidden
 set undofile
+set undodir=~/.nvim/undofiles
 set splitbelow splitright
 set clipboard=unnamedplus
 
@@ -396,3 +400,4 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " hi Normal guibg=NONE ctermbg=NONE  
 " hi CursorLine term=underline cterm=underline guibg=NONE
 " hi CursorLineNr guibg=NONE guifg=NONE
+highlight VertSplit guifg=#abfbe3

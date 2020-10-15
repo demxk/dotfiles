@@ -1,55 +1,79 @@
-if status --is-interactive
-    if test -z "$DISPLAY" -a "$XDG_VTNR" = 1
-        exec startx -- -keeptty
-    end
+# complete funcs for aws and dotnet
+complete --command dotnet --arguments '(dotnet complete (commandline -cp))'
+complete --command aws --no-files --arguments '(begin; set --local --export COMP_SHELL fish; set --local --export COMP_LINE (commandline); aws_completer | sed \'s/ $//\'; end)'
+
+function sudobangbang --on-event fish_postexec
+    abbr !! sudo $argv[1]
 end
 
-# if test "$TTY" -eq "/dev/tty1"
-#     startx
-# end
-set -q TMUX && set -x NVIM_LISTEN_ADDRESS /tmp/nvim_(tmux display -p "#{session_id}")
+function key
+    xclip -selection clipboard -i < dots/unz/masterFir
+end
 
-abbr -a spl string split ' '
-abbr -a tt tmux
-abbr -a tl tmux ls
-abbr -a ta tmux attach -t
-abbr -a tk tmux kill-session -t
+function ... -d 'expand ... to ../../'
+  ../..
+end
 
-abbr -a v nvim
-abbr -a z zathura --fork
+function .... -d 'expand .... to ../../../'
+  ../../..
+end
 
-abbr -a sf source ~/dots/fish/config.fish
-abbr -a vv nvim ~/dots/nvim/init.vim
-abbr -a nf nvim ~/dots/fish/config.fish
+alias cdp 'cd ~/Projects'
 
-abbr -a fp fish --private
-abbr -a ep echo $PATH
+alias upra 'curl -L https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-linux -o ~/.local/bin/rust-analyzer'
 
-abbr -a jr j -r
-abbr -a jt j -t
-abbr -a jx j -x
+abbr --add -- - 'cd -'
+abbr --add md mkdir
+abbr --add xo xdg-open
 
-abbr -a i xclip -selection clipboard -i
-abbr -a o xclip -selection clipboard -o
-abbr -a zo zuluCrypt-cli -o -d ~/backup/crypt -t vera -m /run/media/private -p
-abbr -a zc zuluCrypt-cli -q -d ~/backup/crypt
+# abbr for history merging between fish instances
+abbr --add hh history merge
+abbr --add d 'cd ~/dots'
+
+abbr --add v nvim
+abbr --add nv nvim
+abbr --add nvi nvim
+abbr --add z zathura --fork
+abbr --add pu pulumi
+abbr --add ru rustup
+abbr --add sue sudoedit
+abbr --add cat bat -p
+
+abbr --add sf source ~/dots/fish/config.fish
+abbr --add vv nvim ~/dots/nvim/init.vim
+abbr --add ff nvim ~/dots/fish/config.fish
+abbr --add zz nvim ~/.zshrc
+
+abbr --add fp fish --private
+abbr --add ep 'echo $PATH'
+
+abbr --add jr j -r
+abbr --add jt j -t
+abbr --add jx j -x
+
+abbr --add i xclip -selection clipboard -i
+abbr --add o xclip -selection clipboard -o
 
 # git abbr
-abbr -a gd "git diff -M"
-abbr -a ga "git add"
-abbr -a gaa "git add --all ."
-abbr -a gs "git status"
-abbr -a gbd "git branch -D"
-abbr -a gca "git commit -a -m"
-abbr -a gm "git merge --no-ff"
-abbr -a gpt "git push --tags"
-abbr -a gp "git push"
-abbr -a grh "git reset --hard"
-abbr -a gb "git branch"
-abbr -a gcob "git checkout -b"
-abbr -a gco "git checkout"
-abbr -a gba "git branch -a"
-abbr -a gcp "git cherry-pick"
+abbr --add gd "git diff -M"
+abbr --add ga "git add"
+abbr --add gau "git add -u"
+abbr --add gaa "git add --all ."
+abbr --add gs "git status"
+abbr --add gl 'git log'
+abbr --add glo 'git log --oneline'
+abbr --add gbd "git branch -D"
+abbr --add gca "git commit -a -m"
+abbr --add gcm "git commit -m"
+abbr --add gm "git merge --no-ff"
+abbr --add gpt "git push --tags"
+abbr --add gp "git push"
+abbr --add grh "git reset --hard"
+abbr --add gb "git branch"
+abbr --add gcob "git checkout -b"
+abbr --add gco "git checkout"
+abbr --add gba "git branch -a"
+abbr --add gcp "git cherry-pick"
 
 set -g pure_color_mute magenta
 set -g pure_color_success green
@@ -59,8 +83,9 @@ set -g TERM screen-256color
 
 bind \cj history-prefix-search-forward
 bind \ck history-prefix-search-backward
-bind \cy accept-autosuggestion
-bind \ce end-of-line
+# bind \cy accept-autosuggestion execute
+bind \cf accept-autosuggestion
+bind \ce execute
 
 bind \cl forward-word
 bind \ch backward-word

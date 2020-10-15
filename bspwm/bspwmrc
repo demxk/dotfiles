@@ -1,13 +1,11 @@
 #!/bin/sh
 
-# add_fix &
-pkill sxhkd
 sxhkd &
-pkill polybar
-polybar my_bar &
+# pkill polybar
+# polybar my_bar &
 bspc desktop -l tiled
 # picom -b --experimental-backends &
-nitrogen --restore &
+# nitrogen --restore &
 
 bspc monitor -d 1 2 3 4
 
@@ -31,7 +29,3 @@ bspc config top_monocle_padding         -31
 
 bspc rule -a Zathura state=tiled
 bspc rule -a mpv state=tiled
-bspc rule -a Emacs state=tiled
-bspc rule -a kitty_floating state=floating sticky=on rectangle=1200x700+2+2 center=on
-
-# kitty --class kitty_floating
