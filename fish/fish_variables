@@ -17,8 +17,9 @@ SETUVAR _fish_abbr__21_21_:sudo\x20git\x20status
 SETUVAR _fish_abbr__2D_:cd\x20\x2d
 SETUVAR _fish_abbr_cat:bat\x20\x2dp
 SETUVAR _fish_abbr_d:cd\x20\x7e/dots
-SETUVAR _fish_abbr_echo:echo\x20\x24
+SETUVAR _fish_abbr_disable:sudo\x20systemctl\x20disable
 SETUVAR _fish_abbr_ee:extract
+SETUVAR _fish_abbr_enable:sudo\x20systemctl\x20enable
 SETUVAR _fish_abbr_ep:echo\x20\x24PATH
 SETUVAR _fish_abbr_es:echo\x20\x24status
 SETUVAR _fish_abbr_ff:nvim\x20/home/demxk/dots/fish/config\x2efish
@@ -53,9 +54,12 @@ SETUVAR _fish_abbr_nv:nvim
 SETUVAR _fish_abbr_nvi:nvim
 SETUVAR _fish_abbr_o:xclip\x20\x2dselection\x20clipboard\x20\x2do
 SETUVAR _fish_abbr_pu:pulumi
+SETUVAR _fish_abbr_re:sudo\x20systemctl\x20restart
 SETUVAR _fish_abbr_ru:rustup
 SETUVAR _fish_abbr_sf:source\x20/home/demxk/dots/fish/config\x2efish
 SETUVAR _fish_abbr_spl:string\x20split\x20\x20
+SETUVAR _fish_abbr_start:sudo\x20systemctl\x20start
+SETUVAR _fish_abbr_status:sudo\x20systemctl\x20status
 SETUVAR _fish_abbr_sue:sudoedit
 SETUVAR _fish_abbr_ta:tmux\x20attach\x20\x2dt
 SETUVAR _fish_abbr_tk:tmux\x20kill\x2dsession\x20\x2dt
@@ -98,7 +102,7 @@ SETUVAR fish_pager_color_completion:normal
 SETUVAR fish_pager_color_description:B3A06D\x1eyellow
 SETUVAR fish_pager_color_prefix:green
 SETUVAR fish_pager_color_progress:yellow
-SETUVAR fish_user_paths:/home/demxk/\x2elocal/bin/\x1e/home/demxk/\x2ecargo/bin/\x1e/home/demxk/\x2epulumi/bin/\x1e/home/demxk/\x2epyenv/shims/\x1e/home/demxk/\x2eyarn/bin/
+SETUVAR fish_user_paths:/home/demxk/\x2eemacs\x2ed/bin/\x1e/home/demxk/\x2econfig/nvm/15\x2e0\x2e1/bin\x1e/home/demxk/\x2elocal/bin/\x1e/home/demxk/\x2ecargo/bin/\x1e/home/demxk/\x2epulumi/bin/\x1e/home/demxk/\x2epyenv/shims/\x1e/home/demxk/\x2eyarn/bin/
 SETUVAR pisces_pairs:\x28\x2c\x29\x1e\x5b\x2c\x5d\x1e\x7b\x2c\x7d\x1e\x22\x2c\x22\x1e\x27\x2c\x27
 SETUVAR pure_begin_prompt_with_current_directory:true
 SETUVAR pure_color_command_duration:pure_color_warning
@@ -131,7 +135,7 @@ SETUVAR pure_show_jobs:false
 SETUVAR pure_symbol_git_dirty:\x2a
 SETUVAR pure_symbol_git_unpulled_commits:\u21e3
 SETUVAR pure_symbol_git_unpushed_commits:\u21e1
-SETUVAR pure_symbol_prompt:\u03bb
+SETUVAR pure_symbol_prompt:\u276f
 SETUVAR pure_symbol_reverse_prompt:\u276e
 SETUVAR pure_symbol_title_bar_separator:\u2014
 SETUVAR pure_threshold_command_duration:5

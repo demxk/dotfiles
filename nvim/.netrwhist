@@ -1,5 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =3
+let g:netrw_dirhistcnt =4
+let g:netrw_dirhist_4='/home/demxk/.config/fish/functions'
 let g:netrw_dirhist_3='/home/demxk/.aws'
 let g:netrw_dirhist_2='/home/demxk'
 let g:netrw_dirhist_1='/home/demxk/Pictures'
@@ -9,4 +10,3 @@ let g:netrw_dirhist_8='/home/demxk/Projects'
 let g:netrw_dirhist_7='/home/demxk/RiderProjects/Calc/src/App'
 let g:netrw_dirhist_6='/home/demxk/.config/kitty'
 let g:netrw_dirhist_5='/var/lib/dhcpcd'
-let g:netrw_dirhist_4='/home/demxk/.config/nvim'

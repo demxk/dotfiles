@@ -1,21 +1,25 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
-Plug 'machakann/vim-highlightedyank'
-Plug 'rust-lang/rust.vim'
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 
 " Autocomplete, LSP, Linting
 Plug 'dense-analysis/ale'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+Plug 'liuchengxu/vista.vim'
 
 " Colors
-Plug 'rakr/vim-one'
-Plug 'sheerun/vim-polyglot'
+Plug 'dracula/vim', { 'as': 'dracula' }
+" Plug 'rakr/vim-one'
+" Plug 'sheerun/vim-polyglot'
 Plug 'itchyny/lightline.vim'
-Plug 'embark-theme/vim', { 'as': 'embark' }
+" Plug 'embark-theme/vim', { 'as': 'embark' }
 
 " different usefull plugins
 Plug 'unblevable/quick-scope'
-" Plug 'mhinz/vim-startify'
+Plug 'rhysd/clever-f.vim'
+Plug 'kyazdani42/nvim-web-devicons' " for file icons
+Plug 'kyazdani42/nvim-tree.lua'
+Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'tmsvg/pear-tree'
 Plug 'tpope/vim-commentary'
 Plug 'machakann/vim-sandwich'
@@ -31,17 +35,54 @@ Plug 'airblade/vim-rooter'
 " Plug 'liuchengxu/vim-clap'
 Plug 'junegunn/fzf.vim'
 Plug 'voldikss/vim-floaterm'
+
 call plug#end()
+
+let g:clever_f_smart_case = 1
+let g:clever_f_chars_match_any_signs = ';'
+let g:clever_f_fix_key_direction = 1
+let g:clever_f_show_prompt = 1
+
+nnoremap <C-Space> :Vista<Cr>
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = { 'rust', 'python', 'javascript', 'c_sharp', 'json' },
+  highlight = { enable = true }, -- false will disable the whole extension
+}
+EOF
+" let g:neovide_cursor_antialiasing=v:true
+" let g:neovide_transparency=0.8
+" nnoremap <C-f> ;
+
+let g:vista_default_executive = 'coc'
+let g:lua_tree_ignore = [ '.git', 'node_modules', '.cache', 'target', 'obj', 'dest' ] "empty by default
+let g:lua_tree_auto_close = 1 "0 by default, closes the tree when it's the last window
+nnoremap <C-g> :LuaTreeToggle<CR>
+let g:lua_tree_bindings = {
+    \ 'cd':              '<leader>j',
+    \ }
 
 let g:highlightedyank_highlight_duration = 800
 
+
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
 let g:qs_highlight_on_keys = ['f', 'F']
+let g:qs_accepted_chars = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+augroup qs_colors
+  autocmd!
+  autocmd ColorScheme * highlight QuickScopePrimary guifg='#111111'  guibg='#81fc89' gui=underline ctermfg=81 cterm=underline
+  autocmd ColorScheme * highlight QuickScopeSecondary guifg='#111111'  guibg='#fcfa68' gui=underline ctermfg=81 cterm=underline
+augroup END
+let g:qs_ignorecase = 1
+
+" gui=underline ctermfg=155 cterm=underline
 let g:loaded_python_provider = 0
 let g:python3_host_prog = '~/.pyenv/versions/nvim-python/bin/python'
 
 set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
 
-au TextYankPost * silent! lua vim.highlight.on_yank{timeout=250, on_visual=false, on_macro=true}
+au TextYankPost * silent! lua vim.highlight.on_yank{timeout=250, on_macro=true}
 
 let g:fzf_preview_window = 'right:65%'
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
@@ -81,9 +122,11 @@ vnoremap    ^]k     :m '<-2<CR>gv=gv
 nnoremap    <C-t>       :FloatermToggle<CR>
 nnoremap    <leader>tn  :FloatermNew<CR>
 
-nnoremap    <C-g>       :FloatermNew lf<CR>
-tnoremap    <Esc>       <C-\><C-n>
+" nnoremap    <C-g>       :FloatermNew lf<CR>
 tnoremap    <C-t>       <C-\><C-n>:FloatermToggle<CR>
+
+au TermOpen * tnoremap <buffer> <Esc> <c-\><c-n>
+au FileType fzf tunmap <buffer> <Esc>
 
 imap <C-j> <Down>
 imap <C-k> <Up>
@@ -99,8 +142,11 @@ vmap <C-k> <C-u>
 nnoremap <C-h> ^
 nnoremap <C-l> $
 
+vnoremap <C-h> ^
+vnoremap <C-l> $
+
 " vim-rooter config
-let g:rooter_patterns = ['=src', 'Cargo.toml', '*.csproj']
+let g:rooter_patterns = ['Cargo.toml', '*.csproj', 'package.json', '^.config']
 
 " ____________________________________________________
 " CLAP CONFIG
@@ -138,21 +184,7 @@ augroup Mkdir
   autocmd BufWritePre * call mkdir(expand("<afile>:p:h"), "p")
 augroup END
 
-" " 0 to first non-black char
-" nnoremap 0 ^
-" nnoremap ^ 0
-
-" TABLINE 
-" set showtabline=2
-
 let mapleader=" "
-
-" Fuzzy mapping
-" nnoremap <silent> <leader><leader>      :<C-u>Clap buffers<CR>
-" nnoremap <silent> <leader>fp            :<C-u>Clap gfiles<CR>
-" nnoremap <silent> <leader>fh            :<C-u>Clap history<CR>
-" nnoremap <silent> <leader>ff            :<C-u>Clap files<CR>
-" nnoremap <silent> <leader>fe            :<C-u>Clap filer<CR>
 
 nnoremap <silent> <leader><leader>      :<C-u>Buffers<CR>
 nnoremap <silent> <leader>fg            :<C-u>GFiles<CR>
@@ -160,24 +192,38 @@ nnoremap <silent> <leader>fh            :<C-u>History<CR>
 nnoremap <silent> <leader>ff            :<C-u>Files<CR>
 nnoremap <silent> <leader>rg            :<C-u>Rg<CR>
 
-nnoremap <silent> <leader>rr            :<C-u>source ~/dots/nvim/init.vim<CR>
+" nnoremap <silent> <C-f> :call <SID>switch_or_open_luatree()<CR>
+function s:switch_or_open_luatree(buf_name)
+    if &ft == 'LuaTree'
+        execute last_win 'wincmd w'
+    else
+        let win_nr = bufwinnr('LuaTree')
+
+        let bname = bufname('%')
+        if win_nr == -1
+            :LuaTreeToggle
+        else
+            execute win_nr 'wincmd w'
+        endif
+    endif
+endfunction
 
 
-" open my nvim config file
+" config and source
 nnoremap <leader>oo :e $MYVIMRC<CR>
+nnoremap <leader>rr :<C-u>source ~/dots/nvim/init.vim<CR>
 
 " Move lines up and down
-" nnoremap <M-j> :m+<cr>==
-" nnoremap <M-k> :m-2<cr>==
-" xnoremap <M-j> :m'>+<cr>gv=gv
-" xnoremap <M-k> :m-2<cr>gv=gv
+nnoremap <M-j> :m+<cr>==
+nnoremap <M-k> :m-2<cr>==
+xnoremap <M-j> :m'>+<cr>gv=gv
+xnoremap <M-k> :m-2<cr>gv=gv
 
 " " window resize with Alt + arrows
 " nnoremap <M-Up>     :res +3<CR>
 " nnoremap <M-Down>   :res -3<CR>
 " nnoremap <M-Left>   :vertical res -3<CR>
 " nnoremap <M-Right>  :vertical res +3<CR>
-
 
 set timeoutlen=1000
 
@@ -186,8 +232,8 @@ let g:sneak#use_ic_scs = 1
 
 nmap Y y$
 nmap D ld$
-nmap <leader>w  :w<CR>
-nmap <leader>q  :q!<CR>
+nnoremap <leader>w  :w<CR>
+nnoremap <leader>q  :q!<CR>
 
 " highlight current line, but only in active window
 augroup CursorLineOnlyInActiveWindow
@@ -207,30 +253,28 @@ nmap ``         <C-w><C-w>
 cnoremap <c-j> <down>
 cnoremap <c-k> <up>
 
+function! NearestMethodOrFunction() abort
+  return get(b:, 'vista_nearest_method_or_function', '')
+endfunction
+
 set background=light
 let g:lightline = {
             \ 'component': {
             \   'lineinfo': '%3l,%-2v',
             \ },
-            \ 'mode_map': {
-            \ 'n': 'N',
-            \ 'i': 'I',
-            \ 'v': 'V',
-            \ 'V': 'VL',
-            \ "\<C-v>": 'VB',
-            \ },
             \ 'active': {
-            \   'left':  [ [ 'mode'], ['readonly', 'relativepath', 'modified'], ['cocstatus']],
+            \   'left':  [ [ 'mode'], ['readonly', 'relativepath', 'modified', 'method'], ['cocstatus']],
             \   'right': [ [ 'lineinfo' ], [ 'percent' ],[ 'filetype' ]],
             \ },
             \ 'component_function': {
-            \   'cocstatus': 'coc#status'
+            \   'cocstatus': 'coc#status',
+            \   'method': 'NearestMethodOrFunction'
             \ },
-            \ 'colorscheme': 'nord',
+            \ 'colorscheme': 'dracula',
             \ }
 
 let ayucolor="light"  " for light version of theme
-colorscheme embark
+colorscheme dracula
 
 function! LightlineFilename()
   return expand('%:t') !=# '' ? @% : '[No Name]'
@@ -255,7 +299,9 @@ let g:ale_linters = {
 let g:ale_linters_explicit = 1
 let g:rustfmt_autosave = 1
 
-set wildmode=longest,full
+
+set cmdwinheight=20
+set wildmode=longest:full,full
 set signcolumn=yes
 set ignorecase
 set smartcase
@@ -280,15 +326,16 @@ set diffopt+=iwhite " No whitespace in vimdiff
 nnoremap <silent> <Esc> :nohlsearch<CR><C-L>
 
 "create a new buffer (save it with :w ./path/to/FILENAME)
-nnoremap <leader>B :enew<cr>
+nnoremap <leader>bb :enew<cr>
 
 "wipeout current buffer
 nnoremap <leader>bw :bp <bar> bw! #<cr>
 
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
+autocmd FileType cs setlocal shiftwidth=4
 " " Enable paste in insert mode
-cnoremap <C-R> <C-r><C-o>+
+cnoremap <C-R> <C-r>+
 inoremap <C-R> <C-g>u<C-r><C-o>+
 
 nnoremap <silent> <leader>dt :windo diffthis<CR>
@@ -340,8 +387,12 @@ nmap <leader>ac  <Plug>(coc-codeaction-selected)
 
 inoremap <silent><expr> <c-space> coc#refresh()
 
-inoremap <silent><expr><Tab>
-      \ pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" : "\<Tab>"
+
+" " inoremap <silent><expr><Tab>
+" "       \ pumvisible() ? "\<C-n>" : "\<TAB>"
 
 inoremap <silent><expr><S-Tab>
     \ pumvisible() ? "\<C-p>" : "\<S-Tab>"
@@ -400,4 +451,9 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " hi Normal guibg=NONE ctermbg=NONE  
 " hi CursorLine term=underline cterm=underline guibg=NONE
 " hi CursorLineNr guibg=NONE guifg=NONE
-highlight VertSplit guifg=#abfbe3
+" highlight VertSplit guifg=#abfbe3
+
+highlight PmenuSel guibg=#47576b
+highlight Pmenu guibg=#27374a
+
+highlight LuaTreeNormal guibg=#aaa9ba

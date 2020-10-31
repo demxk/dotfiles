@@ -18,8 +18,14 @@ function .... -d 'expand .... to ../../../'
   ../../..
 end
 
-alias cdp 'cd ~/Projects'
+abbr --add status 'sudo systemctl status'
+abbr --add start 'sudo systemctl start'
+abbr --add enable 'sudo systemctl enable'
+abbr --add disable 'sudo systemctl disable'
+abbr --add re 'sudo systemctl restart'
 
+alias p 'cd ~/Projects'
+alias icat="kitty +kitten icat"
 alias upra 'curl -L https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-linux -o ~/.local/bin/rust-analyzer'
 
 abbr --add -- - 'cd -'
@@ -86,6 +92,7 @@ bind \ck history-prefix-search-backward
 # bind \cy accept-autosuggestion execute
 bind \cf accept-autosuggestion
 bind \ce execute
+bind \cs __fish_prepend_sudo
 
 bind \cl forward-word
 bind \ch backward-word

@@ -1,3 +1,3 @@
 function ll -d 'ls -alst'
-    ls -altr
+    exa -l -s time
 end

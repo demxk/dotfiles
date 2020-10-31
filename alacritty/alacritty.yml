@@ -69,9 +69,10 @@ scrolling:
 font:
   normal:
     family: JetBrainsMono Nerd Font Mono
+    # family: Iosevka
     # family: VictorMono Nerd Font Mono
     style: Regular
-  size: 8.5
+  size: 9
   
   #bold:
     #family: JetBrains Mono
@@ -104,51 +105,52 @@ font:
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
   offset:
-    x: 0
+    x: -1
     y: 1
 
   # Glyph offset determines the locations of the glyphs within their cells with
   # the default being at the bottom. Increasing `x` moves the glyph to the right,
   # increasing `y` moves the glyph upwards.
   glyph_offset:
-    x: 1
-    y: 2
+    x: 0
+    y: 0
 
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: false
+# colors:
+#   # Default colors
+#   primary:
+#     background: '#27292c'
+#     foreground: '#d0d2d1'
+
+#   # Normal colors
+#   normal:
+#     black:   '#35383b'
+#     red:     '#b05655'
+#     green:   '#769972'
+#     yellow:  '#e1a574'
+#     blue:    '#7693ac'
+#     magenta: '#977ba0'
+#     cyan:    '#749e99'
+#     white:   '#848b92'
+
+#   # Bright colors
+#   bright:
+#     black:   '#484c52'
+#     red:     '#d27c7b'
+#     green:   '#dffebe'
+#     yellow:  '#f0d189'
+#     blue:    '#96b1c9'
+#     magenta: '#bfa5c7'
+#     cyan:    '#9fc9c3'
+#     white:   '#fcf7e2'
+
 colors:
   # Default colors
   primary:
-    background: '#242936'
-    foreground: '#dec1a6'
-
-  # Normal colors
-  normal:
-    black:   '#1e2127'
-    red:     '#e06c75'
-    green:   '#98c379'
-    yellow:  '#d19a66'
-    blue:    '#61afef'
-    magenta: '#c678dd'
-    cyan:    '#56b6c2'
-    white:   '#abb2bf'
-
-  # Bright colors
-  bright:
-    black:   '0x5c6370'
-    red:     '0xe06c75'
-    green:   '0x98c379'
-    yellow:  '0xd19a66'
-    blue:    '0x61afef'
-    magenta: '0xc678dd'
-    cyan:    '0x56b6c2'
-    white:   '0xffffff'
-#colors:
-#  # Default colors
-#  primary:
-#    background: '#191930'
-#    foreground: '#dbd4c1'
-#    # foreground: '#111111'
+    background: '#242b36'
+    foreground: '#dbd4c1'
+    # foreground: '#111111'
 
 #    # Bright and dim foreground colors
 #    #
@@ -162,51 +164,51 @@ colors:
 #  #
 #  # Colors which should be used to draw the terminal cursor. If these are unset,
 #  # the cursor color will be the inverse of the cell color.
-#  cursor:
-#    text: '#191919'
-#    cursor: '#d8dee9'
+# cursor:
+#   text: '#191919'
+#   cursor: '#d8dee9'
 
-#  # Selection colors
+# Selection colors
 
-#  # Colors which should be used to draw the selection area. If selection
-#  # background is unset, selection color will be the inverse of the cell colors.
-#  # If only text is unset the cell text color will remain the same.
-#  selection:
-#    text: '#191919'
-#    background: '#bcc4d1'
+# Colors which should be used to draw the selection area. If selection
+# background is unset, selection color will be the inverse of the cell colors.
+# If only text is unset the cell text color will remain the same.
+# selection:
+#   text: '#191919'
+#   background: '#bcc4d1'
 
-#  # Normal colors
-#  normal:
-#    black:   '#333333'
-#    red:     '#f53b2a'
-#    green:   '#0cf710'
-#    yellow:  '#effa28'
-#    blue:    '#1fbcff'
-#    magenta: '#d681f7'
-#    cyan:    '#8eede1'
-#    white:   '#b0c4bb'
+# Normal colors
+  normal:
+    black:   '#333333'
+    red:     '#f53b2a'
+    green:   '#0cf710'
+    yellow:  '#effa28'
+    blue:    '#1fbcff'
+    magenta: '#d681f7'
+    cyan:    '#8eede1'
+    white:   '#b0c4bb'
 
-#  # Bright colors
-#  bright:
-#    black:   '#313539'
-#    red:     '#b02626'
-#    green:   '#40a62f'
-#    yellow:  '#f2e635'
-#    blue:    '#314ad0'
-#    magenta: '#b30ad0'
-#    cyan:    '#32d0fc'
-#    white:   '#acadb1'
+  # Bright colors
+  bright:
+    black:   '#313539'
+    red:     '#b02626'
+    green:   '#40a62f'
+    yellow:  '#f2e635'
+    blue:    '#314ad0'
+    magenta: '#b30ad0'
+    cyan:    '#32d0fc'
+    white:   '#acadb1'
 
-#  # Dim colors
-#  dim:
-#    black:   '#676f78'
-#    red:     '#b55454'
-#    green:   '#78a670'
-#    yellow:  '#faf380'
-#    blue:    '#707fd0'
-#    magenta: '#c583d0'
-#    cyan:    '#8adaf1'
-#    white:   '#e0e3e7'
+  # Dim colors
+  dim:
+    black:   '#676f78'
+    red:     '#b55454'
+    green:   '#78a670'
+    yellow:  '#faf380'
+    blue:    '#707fd0'
+    magenta: '#c583d0'
+    cyan:    '#8adaf1'
+    white:   '#e0e3e7'
 
   # Indexed Colors
   #

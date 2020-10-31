@@ -1,0 +1,42 @@
+swipe:
+  3:
+    left:
+      sendkey: 'LEFTCTRL+LEFTSHIFT+TAB' # history back
+    right:
+      sendkey: 'LEFTCTRL+TAB' # History back
+    up:
+        sendkey: 'LEFTMETA+space'
+    down:
+        sendkey: 'LEFTCTRL+w'
+
+
+
+tap:
+    1:
+        command: 'xdotool click 1'
+    2:
+        command: 'xdotool click 2'
+
+    3:
+        sendkey: 'LEFTMETA+space'
+
+pinch:
+    in:
+        sendkey: 'LEFTMETA+f'
+    out:
+        sendkey: 'LEFTMETA+f'
+
+threshold:
+    swipe: 0.45
+    tap: 0.1
+
+interval:
+  swipe: 0.3
+  pinch: 0.1
+  tap: 0.1
+
+plugin: 
+  inputs:
+    libinput_command_input:
+      enable-tap: true
+      verbose: true

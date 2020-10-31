@@ -5,9 +5,6 @@ function extract --description "Expand or extract bundled & compressed files"
   switch $ext
     case tar  # non-compressed, just bundled
       tar -xvf $argv[1]
-    
-    case 7z
-      7z e $argv[1]
     case gz
       if test (echo $argv[1] | awk -F. '{print $(NF-1)}') = tar  # tar bundle compressed with gzip
         tar -zxvf $argv[1]
@@ -22,6 +19,8 @@ function extract --description "Expand or extract bundled & compressed files"
       unrar x $argv[1]
     case zip
       unzip $argv[1]
+    case 7z
+      7z e $argv
     case '*'
       echo "unknown extension"
   end

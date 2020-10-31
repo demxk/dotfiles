@@ -1,3 +1,3 @@
 function ls --description 'List contents of directory'
-    command ls -G --color=auto $argv
+    exa --color always $argv
 end

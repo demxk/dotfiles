@@ -6,12 +6,17 @@
     "yank.list.maxsize": 10,
     "coc.preferences.useQuickfixForLocations": false,
     "coc.preferences.jumpCommand": "vsp",
-    "coc.preferences.formatOnSaveFiletypes": ["rs"],
+    "coc.preferences.formatOnSaveFiletypes": ["rs", "css", "html", "markdown", "javascript"],
     "diagnostic.checkCurrentLine": true,
     "languageserver": {
         "kotlin": {
             "command": "~/builds/kotlin_lsp/server/bin/kotlin-language-server",
             "filetypes": ["kotlin"]
         }
-    }
+    },
+    "prettier.tabWidth": 4,
+    "prettier.trailingComma": "all",
+    "prettier.semi": false,
+    "prettier.arrowParens": false,
+    "prettier.singleQuote": true,
 }
