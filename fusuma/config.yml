@@ -5,7 +5,7 @@ swipe:
     right:
       sendkey: 'LEFTCTRL+TAB' # History back
     up:
-        sendkey: 'LEFTMETA+space'
+        sendkey: 'LEFTCTRL+LEFTSHIFT+t'
     down:
         sendkey: 'LEFTCTRL+w'
 
@@ -16,7 +16,6 @@ tap:
         command: 'xdotool click 1'
     2:
         command: 'xdotool click 2'
-
     3:
         sendkey: 'LEFTMETA+space'
 
@@ -27,11 +26,11 @@ pinch:
         sendkey: 'LEFTMETA+f'
 
 threshold:
-    swipe: 0.45
+    swipe: 0.4
     tap: 0.1
 
 interval:
-  swipe: 0.3
+  swipe: 0.6
   pinch: 0.1
   tap: 0.1
 

@@ -18,6 +18,21 @@ function .... -d 'expand .... to ../../../'
   ../../..
 end
 
+function fish_user_key_bindings
+    
+    fish_vi_key_bindings insert
+    bind -M insert \cf accept-autosuggestion
+    bind \cf accept-autosuggestion
+
+    bind -M insert \cj history-prefix-search-forward
+    bind -M insert \ck history-prefix-search-backward
+end
+
+# Set the normal and visual mode cursors to a block
+set fish_cursor_default block
+# Set the insert mode cursor to a line
+set fish_cursor_insert line
+
 abbr --add status 'sudo systemctl status'
 abbr --add start 'sudo systemctl start'
 abbr --add enable 'sudo systemctl enable'
@@ -87,8 +102,6 @@ set -g PF_INFO ascii title os shell editor wm font uptime pkgs memory
 set -g fish_pager_color_progress yellow
 set -g TERM screen-256color
 
-bind \cj history-prefix-search-forward
-bind \ck history-prefix-search-backward
 # bind \cy accept-autosuggestion execute
 bind \cf accept-autosuggestion
 bind \ce execute

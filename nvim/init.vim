@@ -1,5 +1,5 @@
 call plug#begin('~/.local/share/nvim/plugged')
-
+Plug 'christianchiarulli/nvcode-color-schemes.vim'
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 
 " Autocomplete, LSP, Linting
@@ -8,11 +8,11 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'liuchengxu/vista.vim'
 
 " Colors
-Plug 'dracula/vim', { 'as': 'dracula' }
+" Plug 'dracula/vim', { 'as': 'dracula' }
 " Plug 'rakr/vim-one'
 " Plug 'sheerun/vim-polyglot'
 Plug 'itchyny/lightline.vim'
-" Plug 'embark-theme/vim', { 'as': 'embark' }
+Plug 'embark-theme/vim', { 'as': 'embark' }
 
 " different usefull plugins
 Plug 'unblevable/quick-scope'
@@ -270,11 +270,11 @@ let g:lightline = {
             \   'cocstatus': 'coc#status',
             \   'method': 'NearestMethodOrFunction'
             \ },
-            \ 'colorscheme': 'dracula',
+            \ 'colorscheme': 'embark',
             \ }
 
 let ayucolor="light"  " for light version of theme
-colorscheme dracula
+colorscheme TSnazzy
 
 function! LightlineFilename()
   return expand('%:t') !=# '' ? @% : '[No Name]'
@@ -453,7 +453,7 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " hi CursorLineNr guibg=NONE guifg=NONE
 " highlight VertSplit guifg=#abfbe3
 
-highlight PmenuSel guibg=#47576b
+highlight PmenuSel guibg=#47576b guifg=#92d9de
 highlight Pmenu guibg=#27374a
 
 highlight LuaTreeNormal guibg=#aaa9ba
